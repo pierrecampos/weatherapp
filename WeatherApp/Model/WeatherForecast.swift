@@ -17,8 +17,14 @@ struct WeatherForecast: Codable {
 
 struct Main: Codable {
     var temp: Double
-    var temp_min: Double
-    var temp_max: Double
+    var tempMin: Double
+    var tempMax: Double
+    
+    private enum CodingKeys: String, CodingKey {
+        case temp
+        case tempMin = "temp_min"
+        case tempMax = "temp_max"
+    }
 }
 
 struct Weather: Codable {
