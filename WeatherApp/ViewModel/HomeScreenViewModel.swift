@@ -8,7 +8,20 @@
 import UIKit
 
 class HomeScreenViewModel {
-    var weatherForecast: WeatherForecastResult?
+    var weatherForecast: WeatherForecastModel?
+    var dataSource: WeatherForecastModel?
     
+    
+    public func fetchWeatherForecast() {
+        OpenWeatherApiService.getWeatherForescat { result in
+            switch result {
+            case .success(let data):
+                print(data)
+            case .failure(let error):
+                print(error)
+            }
+        
+        }
+    }
  
 }

@@ -22,7 +22,11 @@ class HomeViewController: UIViewController {
         //        title = "Itauna, MG"
         self.configNavigationBarButtonItems()
         self.setupData()
-    }    
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.viewModel?.fetchWeatherForecast()
+    }
     
     private func configNavigationBarButtonItems() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: nil)

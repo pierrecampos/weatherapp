@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F7E70A22AACD1A900DA72C1 /* OpenWeatherApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */; };
 		8FF23A432AABDFF700240E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF23A422AABDFF700240E18 /* AppDelegate.swift */; };
 		8FF23A452AABDFF700240E18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF23A442AABDFF700240E18 /* SceneDelegate.swift */; };
 		8FF23A472AABDFF700240E18 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF23A462AABDFF700240E18 /* HomeViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherApiService.swift; sourceTree = "<group>"; };
 		8FF23A3F2AABDFF700240E18 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF23A422AABDFF700240E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF23A442AABDFF700240E18 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F7E70A02AACD01700DA72C1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		8FF23A362AABDFF700240E18 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +70,7 @@
 		8FF23A412AABDFF700240E18 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				8F7E70A02AACD01700DA72C1 /* Service */,
 				8FF23A612AABF4ED00240E18 /* Model */,
 				8FF23A5E2AABED9100240E18 /* ViewModel */,
 				8FF23A562AABE2DE00240E18 /* View */,
@@ -177,6 +188,7 @@
 			files = (
 				8FF23A472AABDFF700240E18 /* HomeViewController.swift in Sources */,
 				8FF23A432AABDFF700240E18 /* AppDelegate.swift in Sources */,
+				8F7E70A22AACD1A900DA72C1 /* OpenWeatherApiService.swift in Sources */,
 				8FF23A452AABDFF700240E18 /* SceneDelegate.swift in Sources */,
 				8FF23A632AABF52600240E18 /* WeatherForecast.swift in Sources */,
 				8FF23A5D2AABE39A00240E18 /* HomeScreenView.swift in Sources */,

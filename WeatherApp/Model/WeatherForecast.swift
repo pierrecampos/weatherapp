@@ -5,7 +5,7 @@
 //  Created by Pierre Campos Dias on 08/09/23.
 //
 
-struct WeatherForecastResult: Codable {
+struct WeatherForecastModel: Codable {
     var list: [WeatherForecast]
 }
 
