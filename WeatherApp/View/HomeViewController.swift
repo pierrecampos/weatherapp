@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    var viewModel: HomeScreenViewModel?
     var screen: HomeScreenView?
     
     override func loadView() {
@@ -18,10 +19,17 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Weather App"
-        self.view.backgroundColor = .white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: nil)
-        
+        //        title = "Itauna, MG"
+        self.configNavigationBarButtonItems()
+        self.setupData()
+    }    
+    
+    private func configNavigationBarButtonItems() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: nil)
+    }
+    
+    private func setupData() {
+        self.viewModel = HomeScreenViewModel()
     }
     
     
