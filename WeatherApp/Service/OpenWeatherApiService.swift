@@ -13,6 +13,7 @@ enum Error: Swift.Error {
 }
 
 public class OpenWeatherApiService {
+   
     static func getWeatherForescat(completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
         let urlString = "https://run.mocky.io/v3/cf4a2eeb-e732-412e-9010-c55d70214f38"
         guard let url = URL(string: urlString) else {
@@ -21,16 +22,15 @@ public class OpenWeatherApiService {
         }
         
         URLSession.shared.dataTask(with: url) { dataResponse, urlResponse, error in
-           if error == nil,
-              let data = dataResponse,
-              let resultData = try? JSONDecoder().decode(WeatherForecastModel.self, from: data) {
-               completionHandler(.success(resultData))
-           } else {
-               completionHandler(.failure(.canNotParseData))
-           }
+            DispatchQueue.main.async {
+                if error == nil,
+                   let data = dataResponse,
+                   let resultData = try? JSONDecoder().decode(WeatherForecastModel.self, from: data) {
+                    completionHandler(.success(resultData))
+                } else {
+                    completionHandler(.failure(.canNotParseData))
+                }}
             
         }.resume()
-        
-        
     }
 }
