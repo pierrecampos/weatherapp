@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    var viewModel: HomeScreenViewModel?
+    var viewModel = HomeScreenViewModel()
     var screen: HomeScreenView?
     
     override func loadView() {
@@ -19,21 +19,27 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        title = "Itauna, MG"
         self.configNavigationBarButtonItems()
-        self.setupData()
+        self.setupDelegates()
+    }
+    
+    private func setupDelegates() {
+        viewModel.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.viewModel?.fetchWeatherForecast()
+        self.viewModel.fetchWeatherForecast()
     }
     
     private func configNavigationBarButtonItems() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: nil)
-    }
+    } 
     
-    private func setupData() {
-        self.viewModel = HomeScreenViewModel()
+}
+
+extension HomeViewController: HomeScreenViewModelDelegate {
+    func successFetchData(_ data: WeatherForecastModel) {
+        screen?.setupInfo(data: data)
     }
     
     

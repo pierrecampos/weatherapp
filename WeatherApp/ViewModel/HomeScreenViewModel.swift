@@ -7,21 +7,27 @@
 
 import UIKit
 
+protocol HomeScreenViewModelDelegate: AnyObject {
+    func successFetchData(_ data: WeatherForecastModel)
+}
+
 class HomeScreenViewModel {
+    
+    public weak var delegate: HomeScreenViewModelDelegate?
+    
     var weatherForecast: WeatherForecastModel?
     var dataSource: WeatherForecastModel?
     
-    
     public func fetchWeatherForecast() {
-        OpenWeatherApiService.getWeatherForescat { result in
+        OpenWeatherApiService.getWeatherForescat { [weak self] result in
             switch result {
             case .success(let data):
-                print(data)
+                self?.delegate?.successFetchData(data)
             case .failure(let error):
                 print(error)
             }
-        
+            
         }
     }
- 
+    
 }
