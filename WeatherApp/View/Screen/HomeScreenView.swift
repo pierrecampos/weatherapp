@@ -9,6 +9,14 @@ import UIKit
 
 class HomeScreenView: UIView {
     
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.style = .large
+        indicator.startAnimating()
+        return indicator
+    }()
+    
     lazy var temperatureImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +56,7 @@ class HomeScreenView: UIView {
         self.addSubview(self.temperatureImageView)
         self.addSubview(self.temperatureLabel)
         self.addSubview(self.temperatureSymbolLabel)
+        self.addSubview(self.loadingIndicator)
     }
     
     private func configConstraints() {
@@ -56,13 +65,21 @@ class HomeScreenView: UIView {
             self.temperatureImageView.widthAnchor.constraint(equalToConstant: 170),
             self.temperatureImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
             self.temperatureImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
+
             self.temperatureLabel.topAnchor.constraint(equalTo: self.temperatureImageView.bottomAnchor, constant: 20),
             self.temperatureLabel.centerXAnchor.constraint(equalTo: self.temperatureImageView.centerXAnchor),
-            
+
             self.temperatureSymbolLabel.topAnchor.constraint(equalTo: self.temperatureLabel.topAnchor),
             self.temperatureSymbolLabel.leadingAnchor.constraint(equalTo: self.temperatureLabel.trailingAnchor, constant: 0),
+            
+            self.loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.loadingIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
+    }
+    
+    public func setupInfo(data: WeatherForecastModel) {
+        self.loadingIndicator.stopAnimating()
+        self.temperatureLabel.text = String(format:"%.0f", round(data.list[0].main.temp))
     }
     
 }
