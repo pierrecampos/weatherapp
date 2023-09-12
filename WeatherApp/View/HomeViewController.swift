@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
     
 }
 
+// MARK: - Delegates 
 extension HomeViewController: HomeScreenViewModelDelegate {
     func successFetchData(_ data: WeatherForecastModel) {
         screen?.setupInfo(data: data)

@@ -15,7 +15,6 @@ class HomeScreenViewModel {
     
     public weak var delegate: HomeScreenViewModelDelegate?
     
-    var weatherForecast: WeatherForecastModel?
     var dataSource: WeatherForecastModel?
     
     public func fetchWeatherForecast() {
