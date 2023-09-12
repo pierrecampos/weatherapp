@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configNavigationBarButtonItems()
         self.setupDelegates()
     }
     
@@ -30,19 +29,29 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.viewModel.fetchWeatherForecast()
     }
-    
-    private func configNavigationBarButtonItems() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: nil)
-    } 
+
     
 }
 
-// MARK: - Delegates 
-extension HomeViewController: HomeScreenViewModelDelegate {
-    func successFetchData(_ data: WeatherForecastModel) {
-        screen?.setupInfo(data: data)
+// MARK: - Delegates
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel.numberOfRows
     }
     
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // TODO: Refactor
+        let cell = UITableViewCell()
+        cell.backgroundColor = .clear
+        return cell
+    }
+
+}
+
+extension HomeViewController: HomeScreenViewModelDelegate {
+    func successFetchData() {
+        self.screen?.setupTableViewProtocols(delegate: self, dataSource: self)
+        self.screen?.reloadTableView()
+    }
 }
 

@@ -8,20 +8,25 @@
 import UIKit
 
 protocol HomeScreenViewModelDelegate: AnyObject {
-    func successFetchData(_ data: WeatherForecastModel)
+    func successFetchData()
 }
 
 class HomeScreenViewModel {
     
     public weak var delegate: HomeScreenViewModelDelegate?
     
-    var dataSource: WeatherForecastModel?
+    var dataSource = WeatherForecastModel(list: [])
+    
+    var numberOfRows: Int {
+        return dataSource.list.count
+    }
     
     public func fetchWeatherForecast() {
         OpenWeatherApiService.getWeatherForescat { [weak self] result in
             switch result {
             case .success(let data):
-                self?.delegate?.successFetchData(data)
+                self?.dataSource = data
+                self?.delegate?.successFetchData()
             case .failure(let error):
                 print(error)
             }
