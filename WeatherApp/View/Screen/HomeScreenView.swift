@@ -17,6 +17,17 @@ class HomeScreenView: UIView {
         return indicator
     }()
     
+    lazy var cityLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 36)
+        label.textAlignment = .center
+        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 2
+        label.text = "Belo Horizonte"
+        return label
+    }()
+    
     lazy var temperatureImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +71,7 @@ class HomeScreenView: UIView {
     }
     
     private func addSubViews() {
+        self.addSubview(self.cityLabel)
         self.addSubview(self.temperatureImageView)
         self.addSubview(self.temperatureDescription)
         self.addSubview(self.temperatureLabel)
@@ -69,9 +81,13 @@ class HomeScreenView: UIView {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
+            self.cityLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            self.cityLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            self.cityLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            
             self.temperatureImageView.heightAnchor.constraint(equalToConstant: 100),
             self.temperatureImageView.widthAnchor.constraint(equalToConstant: 100),
-            self.temperatureImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            self.temperatureImageView.topAnchor.constraint(equalTo: self.cityLabel.bottomAnchor, constant: 20),
             self.temperatureImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             self.temperatureDescription.topAnchor.constraint(equalTo: self.temperatureImageView.bottomAnchor, constant: 6),
