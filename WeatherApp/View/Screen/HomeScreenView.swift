@@ -59,15 +59,37 @@ class HomeScreenView: UIView {
         return label
     }()
     
+    var gradientLayer = CAGradientLayer()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.setupGradientView()
         self.addSubViews()
         self.configConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = self.bounds
+    }
+    
+    func setupGradientView(){
+        self.backgroundColor = .white
+
+        let fistColor = CGColor(red: 38/255, green: 43/255, blue: 43/255, alpha: 1)
+        let secondColor = CGColor(red: 15/255, green: 29/255, blue: 21/255, alpha: 1)
+        gradientLayer.colors = [fistColor, secondColor]
+        gradientLayer.locations = [0.5, 1.0]
+        
+        gradientLayer.startPoint = CGPoint.zero
+        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        
+        self.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     private func addSubViews() {
@@ -108,20 +130,8 @@ class HomeScreenView: UIView {
         let weatherForecast = data.list[0]
         self.loadingIndicator.stopAnimating()
         self.temperatureLabel.text = String(format:"%.0f", round(weatherForecast.main.temp))
-        self.setupTodayImage(weatherForecast.weather[0].iconUrl)
+        
     }
     
-    private func setupTodayImage(_ urlImage: String) {
-        OpenWeatherApiService.getImageFromUrl(urlString: urlImage) { [weak self] result in
-            
-            switch result {
-            case .success(let image):
-                self?.temperatureImageView.image = image
-            case .failure(_):
-                // TODO: Refactor - Create method to replaced image 
-                self?.temperatureImageView.image = UIImage(systemName: "sun.max.trianglebadge.exclamationmark.fill")
-            }
-        }
-    }
 }
 
