@@ -65,8 +65,7 @@ class HomeScreenView: UITableView {
         self.reloadData()
     }
     
-    public func setupInfo(data: WeatherForecastModel) {
-        let weatherForecast = data.list[0]
+    public func setupInfo(data: WeatherForecast) {
         self.loadingIndicator.stopAnimating()
     }
     

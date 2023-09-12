@@ -51,6 +51,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: HomeScreenViewModelDelegate {
     func successFetchData() {
         self.screen?.setupTableViewProtocols(delegate: self, dataSource: self)
+        self.screen?.setupInfo(data: self.viewModel.dataSource.list[0])
         self.screen?.reloadTableView()
     }
 }
