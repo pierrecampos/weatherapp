@@ -24,10 +24,17 @@ class HomeScreenView: UIView {
         return image
     }()
     
+    lazy var temperatureDescription: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Céu Limpo"
+        return label
+    }()
+    
     lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 56)
+        label.font = UIFont.systemFont(ofSize: 50)
         label.text = "21"
         return label
         
@@ -40,7 +47,7 @@ class HomeScreenView: UIView {
         label.text = "°C"
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -54,6 +61,7 @@ class HomeScreenView: UIView {
     
     private func addSubViews() {
         self.addSubview(self.temperatureImageView)
+        self.addSubview(self.temperatureDescription)
         self.addSubview(self.temperatureLabel)
         self.addSubview(self.temperatureSymbolLabel)
         self.addSubview(self.loadingIndicator)
@@ -61,14 +69,17 @@ class HomeScreenView: UIView {
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
-            self.temperatureImageView.heightAnchor.constraint(equalToConstant: 170),
-            self.temperatureImageView.widthAnchor.constraint(equalToConstant: 170),
+            self.temperatureImageView.heightAnchor.constraint(equalToConstant: 100),
+            self.temperatureImageView.widthAnchor.constraint(equalToConstant: 100),
             self.temperatureImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
             self.temperatureImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
-            self.temperatureLabel.topAnchor.constraint(equalTo: self.temperatureImageView.bottomAnchor, constant: 20),
-            self.temperatureLabel.centerXAnchor.constraint(equalTo: self.temperatureImageView.centerXAnchor),
-
+            
+            self.temperatureDescription.topAnchor.constraint(equalTo: self.temperatureImageView.bottomAnchor, constant: 6),
+            self.temperatureDescription.centerXAnchor.constraint(equalTo: self.temperatureImageView.centerXAnchor),
+            
+            self.temperatureLabel.topAnchor.constraint(equalTo: self.temperatureDescription.bottomAnchor, constant: 20),
+            self.temperatureLabel.centerXAnchor.constraint(equalTo: self.temperatureDescription.centerXAnchor),
+            
             self.temperatureSymbolLabel.topAnchor.constraint(equalTo: self.temperatureLabel.topAnchor),
             self.temperatureSymbolLabel.leadingAnchor.constraint(equalTo: self.temperatureLabel.trailingAnchor, constant: 0),
             
@@ -78,8 +89,23 @@ class HomeScreenView: UIView {
     }
     
     public func setupInfo(data: WeatherForecastModel) {
+        let weatherForecast = data.list[0]
         self.loadingIndicator.stopAnimating()
-        self.temperatureLabel.text = String(format:"%.0f", round(data.list[0].main.temp))
+        self.temperatureLabel.text = String(format:"%.0f", round(weatherForecast.main.temp))
+        self.setupTodayImage(weatherForecast.weather[0].iconUrl)
     }
     
+    private func setupTodayImage(_ urlImage: String) {
+        OpenWeatherApiService.getImageFromUrl(urlString: urlImage) { [weak self] result in
+            
+            switch result {
+            case .success(let image):
+                self?.temperatureImageView.image = image
+            case .failure(_):
+                // TODO: Refactor - Create method to replaced image 
+                self?.temperatureImageView.image = UIImage(systemName: "sun.max.trianglebadge.exclamationmark.fill")
+            }
+        }
+    }
 }
+
