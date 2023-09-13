@@ -14,8 +14,21 @@ enum Error: Swift.Error {
 }
 
 public class OpenWeatherApiService {
+    
+    static func getWeatherForecastJson(completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
+        guard let url = Bundle.main.url(forResource: "forecast", withExtension: "json")
+        else { return completionHandler(.failure(.urlError))}
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let forecast = try JSONDecoder().decode(WeatherForecastModel.self, from: data)
+            completionHandler(.success(forecast))
+        } catch {
+            completionHandler(.failure(.canNotParseData))
+        }
+    }
    
-    static func getWeatherForescat(completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
+    static func getWeatherForecast(completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
         let urlString = "https://run.mocky.io/v3/cf4a2eeb-e732-412e-9010-c55d70214f38"        
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(.urlError))

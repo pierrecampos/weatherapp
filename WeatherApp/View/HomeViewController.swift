@@ -28,12 +28,8 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        self.viewModel.fetchWeatherForecast()
-        // TODO: Remove
-        self.screen?.setupTableViewProtocols(delegate: self, dataSource: self)
-        self.screen?.reloadTableView()
-    }
-    
+        self.viewModel.fetchWeatherForecast()
+    }    
 }
 
 // MARK: - Delegates
@@ -53,7 +49,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = HomeScreenViewHeader()
-        header.backgroundColor = .red
         return header
     }
     

@@ -60,10 +60,6 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
             
             self.temperatureSymbolLabel.topAnchor.constraint(equalTo: self.temperatureLabel.topAnchor),
             self.temperatureSymbolLabel.leadingAnchor.constraint(equalTo: self.temperatureLabel.trailingAnchor),
-            
-            
-            
-            
         ])
     }
     

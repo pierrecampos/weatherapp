@@ -35,7 +35,6 @@ class HomeScreenView: UITableView {
         backgroundView = gradientView
         
         self.alwaysBounceVertical = false
-        
     }
     
     private func registerItems() {

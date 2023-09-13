@@ -22,7 +22,7 @@ class HomeScreenViewModel {
     }
     
     public func fetchWeatherForecast() {
-        OpenWeatherApiService.getWeatherForescat { [weak self] result in
+        OpenWeatherApiService.getWeatherForecastJson { [weak self] result in
             switch result {
             case .success(let data):
                 self?.dataSource = data
@@ -30,7 +30,6 @@ class HomeScreenViewModel {
             case .failure(let error):
                 print(error)
             }
-            
         }
     }
     
