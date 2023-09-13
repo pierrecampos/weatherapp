@@ -9,10 +9,13 @@ import UIKit
 
 class HomeScreenViewHeader: UITableViewHeaderFooterView {
     static let identifier = "TableHeader"
-
+    
+    //MARK: - Components
     lazy var cityLabel = UILabelComponent(labelText: "Belo Horzionte, MG", fontSize: 30, fontWeight: .regular, fontColor: .primary)
     lazy var temperatureLabel = UILabelComponent(labelText: "21", fontSize: 128, fontWeight: .bold, fontColor: .secondary)
     lazy var temperatureSymbolLabel = UILabelComponent(labelText: "°C", fontSize: 32, fontWeight: .bold, fontColor: .primary)
+    lazy var maxTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Max: 22°", type: .max)
+    lazy var minTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Min: 18°", type: .min)
     
     lazy var searchButton: UIButton = {
         let button = UIButton()
@@ -24,6 +27,15 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         button.imageEdgeInsets = UIEdgeInsets(top: 26, left: 26, bottom: 26, right: 26)
         return button
     }()
+    
+    //MARK: - Stacks Views
+    lazy var temperatureMinMaxFocus = createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
+                                                      axis: .vertical, alignment: .leading, distribution: .fillEqually, spacing: 15)
+    lazy var temperatureFocus = createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
+    
+    
+    
+    
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -38,8 +50,7 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
     private func addSubviews() {
         self.addSubview(cityLabel)
         self.addSubview(searchButton)
-        self.addSubview(temperatureLabel)
-        self.addSubview(temperatureSymbolLabel)
+        self.addSubview(temperatureFocus)
         
     }
     
@@ -53,14 +64,26 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
             self.searchButton.centerYAnchor.constraint(equalTo: self.cityLabel.centerYAnchor),
             self.searchButton.heightAnchor.constraint(equalToConstant: 26),
             
-            self.temperatureLabel.topAnchor.constraint(equalTo: self.cityLabel.bottomAnchor, constant: 30),
-            self.temperatureLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.temperatureLabel.heightAnchor.constraint(equalToConstant: 100),
+            self.temperatureFocus.topAnchor.constraint(equalTo: self.cityLabel.bottomAnchor, constant: 30),
+            self.temperatureFocus.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.temperatureFocus.heightAnchor.constraint(equalToConstant: 100),
             
-            
-            self.temperatureSymbolLabel.topAnchor.constraint(equalTo: self.temperatureLabel.topAnchor),
-            self.temperatureSymbolLabel.leadingAnchor.constraint(equalTo: self.temperatureLabel.trailingAnchor),
         ])
+    }
+    
+    private func createStackView(items: [UIView], axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = axis
+        stack.alignment = alignment
+        stack.distribution = distribution
+        stack.spacing = spacing
+        
+        items.forEach { view in
+            stack.addArrangedSubview(view)
+        }
+        
+        return stack
     }
     
     public func setupHeader(with forecast: WeatherForecast) {

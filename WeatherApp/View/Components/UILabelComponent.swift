@@ -9,7 +9,7 @@ import UIKit
 
 class UILabelComponent: UILabel {
     
-    enum fontColor {
+    enum FontColor {
         case primary
         case secondary
     }
@@ -17,9 +17,9 @@ class UILabelComponent: UILabel {
     public private(set) var labelText: String
     public private(set) var fontSize: CGFloat
     public private(set) var fontWeight: UIFont.Weight
-    public private(set) var fontColor: fontColor
+    public private(set) var fontColor: FontColor
     
-    init(labelText: String, fontSize: CGFloat, fontWeight: UIFont.Weight, fontColor: fontColor) {
+    init(labelText: String, fontSize: CGFloat, fontWeight: UIFont.Weight, fontColor: FontColor) {
         self.labelText = labelText
         self.fontSize = fontSize
         self.fontWeight = fontWeight
