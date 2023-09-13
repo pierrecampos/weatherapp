@@ -10,7 +10,7 @@ struct WeatherForecastModel: Codable {
 }
 
 struct WeatherForecast: Codable {
-    var dt: Int
+    var dt: Double
     var main: Main
     var weather: [Weather]
 }

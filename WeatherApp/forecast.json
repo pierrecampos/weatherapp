@@ -6,10 +6,10 @@
     {
       "dt": 1694617200,
       "main": {
-        "temp": 30.55,
+        "temp": 28.55,
         "feels_like": 28.99,
-        "temp_min": 30.55,
-        "temp_max": 30.55,
+        "temp_min": 21.55,
+        "temp_max": 31.55,
         "pressure": 1015,
         "sea_level": 1015,
         "grnd_level": 926,
