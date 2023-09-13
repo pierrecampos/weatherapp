@@ -29,6 +29,13 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         return button
     }()
     
+    lazy var temperatureImage: UIImageView = {
+        let uiImage = UIImageView()
+        uiImage.translatesAutoresizingMaskIntoConstraints = false
+        uiImage.image = UIImage(systemName: "sun.max.fill")?.scalePreservingAspectRatio(targetSize: CGSize(width: 120, height: 120)).withTintColor(.white)
+        return uiImage
+    }()
+    
     //MARK: - Stacks Views
     lazy var temperatureMinMaxFocus = createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
                                                       axis: .vertical, alignment: .leading, distribution: .fillEqually, spacing: 15)
@@ -49,6 +56,7 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         self.addSubview(searchButton)
         self.addSubview(temperatureFocus)
         self.addSubview(dayLabel)
+        self.addSubview(temperatureImage)
         
     }
     
@@ -68,6 +76,9 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
             
             self.dayLabel.topAnchor.constraint(equalTo: self.temperatureFocus.bottomAnchor, constant: 30),
             self.dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            self.temperatureImage.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 30),
+            self.temperatureImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
         ])
     }
