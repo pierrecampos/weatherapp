@@ -23,6 +23,7 @@ class HomeScreenView: UITableView {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: .plain)
         self.configureView()
+        self.registerItems()
         self.addSubViews()
         self.configConstraints()
     }
@@ -34,6 +35,11 @@ class HomeScreenView: UITableView {
         backgroundView = gradientView
         
         self.alwaysBounceVertical = false
+        
+    }
+    
+    private func registerItems() {
+        self.register(HomeScreenViewHeader.self, forHeaderFooterViewReuseIdentifier: HomeScreenViewHeader.identifier)
     }
     
     required init?(coder: NSCoder) {
@@ -68,6 +74,8 @@ class HomeScreenView: UITableView {
     public func setupInfo(data: WeatherForecast) {
         self.loadingIndicator.stopAnimating()
     }
+    
+    
     
 }
 

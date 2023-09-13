@@ -19,17 +19,20 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         self.setupDelegates()
     }
-    
+        
     private func setupDelegates() {
         viewModel.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.viewModel.fetchWeatherForecast()
+//        self.viewModel.fetchWeatherForecast()
+        // TODO: Remove
+        self.screen?.setupTableViewProtocols(delegate: self, dataSource: self)
+        self.screen?.reloadTableView()
     }
-
     
 }
 
@@ -43,9 +46,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         // TODO: Refactor
         let cell = UITableViewCell()
         cell.backgroundColor = .clear
+        cell.textLabel?.textColor = .red
+        cell.textLabel?.text = "Teste"
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = HomeScreenViewHeader()
+        header.backgroundColor = .red
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 200
+    }
 }
 
 extension HomeViewController: HomeScreenViewModelDelegate {
