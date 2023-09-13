@@ -21,6 +21,10 @@ class HomeScreenViewModel {
         return dataSource.list.count
     }
     
+    public func loadCurrentWeatherForecast(_ indexPath: IndexPath) -> WeatherForecast {
+        return dataSource.list[indexPath.row]
+    }
+    
     public func fetchWeatherForecast() {
         OpenWeatherApiService.getWeatherForecastJson { [weak self] result in
             switch result {

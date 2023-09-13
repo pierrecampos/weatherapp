@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.viewModel.fetchWeatherForecast()
-    }    
+    }
 }
 
 // MARK: - Delegates
@@ -48,7 +48,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = HomeScreenViewHeader()
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeScreenViewHeader.identifier) as! HomeScreenViewHeader
+        let indexPath = tableView.indexPathForSelectedRow ?? IndexPath(row: 0, section: 0)
+        header.setupHeader(with: viewModel.loadCurrentWeatherForecast(indexPath))        
         return header
     }
     

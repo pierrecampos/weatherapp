@@ -63,4 +63,8 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         ])
     }
     
+    public func setupHeader(with forecast: WeatherForecast) {
+        self.cityLabel.text = "Belo Horizonte, MG" // TODO: Refactor to CLLocationManager
+    }
+    
 }
