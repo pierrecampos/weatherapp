@@ -37,10 +37,17 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         return uiImage
     }()
     
+    lazy var probabilityPrecipitation = AditionalInfoComponent(iconName: .rain, iconSize: CGSize(width: 30, height: 30), descriptionText: "50%")
+    lazy var windSpeed = AditionalInfoComponent(iconName: .wind, iconSize: CGSize(width: 30, height: 30), descriptionText: "16 km/h")
+    lazy var humidity = AditionalInfoComponent(iconName: .humidity, iconSize: CGSize(width: 30, height: 30), descriptionText: "50%")
+    
     //MARK: - Stacks Views
     lazy var temperatureMinMaxFocus = createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
                                                       axis: .vertical, alignment: .leading, distribution: .fillEqually, spacing: 10)
+    
     lazy var temperatureFocus = createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
+    
+    lazy var aditionalInfoFocus = createStackView(items: [probabilityPrecipitation, windSpeed, humidity], axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 64)
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -59,6 +66,8 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         self.addSubview(dayLabel)
         self.addSubview(temperatureImage)
         self.addSubview(dayDescription)
+        self.addSubview(aditionalInfoFocus)
+
     }
     
     private func configConstraints() {
@@ -84,6 +93,8 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
             self.dayDescription.topAnchor.constraint(equalTo: self.temperatureImage.bottomAnchor, constant: 30),
             self.dayDescription.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
+            self.aditionalInfoFocus.topAnchor.constraint(equalTo: self.dayDescription.bottomAnchor, constant: 15),
+            self.aditionalInfoFocus.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }
     
@@ -112,6 +123,9 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         self.dayLabel.text = viewModel.getDayAndDate
         self.temperatureImage.image = viewModel.getTemperatureImage
         self.dayDescription.text = viewModel.getDayDescription
+        self.probabilityPrecipitation.updateData(descriptionText: viewModel.getProbabilityPrecipitation)
+        self.windSpeed.updateData(descriptionText: viewModel.getWindSpeed)
+        self.humidity.updateData(descriptionText: viewModel.getHumidity)
     }
     
 }

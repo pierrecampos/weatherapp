@@ -47,15 +47,30 @@ class HeaderViewModel {
         
         return dateFormatter.string(from: date).capitalized
     }
-
+    
     public var getTemperatureImage: UIImage {
-        var iconName = self.getIconForecast(of: weatherForecast.weather[0].id)
+        let iconName = self.getIconForecast(of: weatherForecast.weather[0].id)
         return  UIImage(systemName: iconName)!.scalePreservingAspectRatio(targetSize: CGSize(width: 120, height: 120)).withTintColor(.secondary)
     }
     
     public var getDayDescription: String {
         return weatherForecast.weather[0].description.capitalized
     }
+    
+    public var getProbabilityPrecipitation: String {
+        let preciptation = weatherForecast.pop * 100
+        return String(format: "%.0f%%", preciptation)
+    }
+    
+    public var getWindSpeed: String {
+        let speed = weatherForecast.wind.speed * 3.6
+        return String(format: "%.0f km/h", speed)
+    }
+    
+    public var getHumidity: String {
+        return String(format: "%.0f%%", weatherForecast.main.humidity)
+    }
+    
     
     // Code Icons https://openweathermap.org/weather-conditions
     private func getIconForecast(of id: Int) -> String {

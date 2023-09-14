@@ -33,7 +33,7 @@
         "gust": 3.68
       },
       "visibility": 10000,
-      "pop": 0,
+      "pop": 0.35,
       "sys": {
         "pod": "d"
       },
