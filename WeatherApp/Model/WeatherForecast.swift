@@ -28,6 +28,7 @@ struct Main: Codable {
 }
 
 struct Weather: Codable {
+    var id: Int
     var description: String
     var icon: String
     var iconUrl: String {

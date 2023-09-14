@@ -6,6 +6,17 @@
 //
 
 import Foundation
+import UIKit
+
+enum WeatherIconEnum: String {
+    case thunderstorm = "cloud.bolt.rain.fill"
+    case drizzle = "cloud.drizzle.fill"
+    case rain = "cloud.heavyrain.fill"
+    case snow = "cloud.snow.fill"
+    case clear = "sun.max.fill"
+    case clouds = "cloud.fill"
+    case other = "sun.haze.fill"
+}
 
 class HeaderViewModel {
     private var weatherForecast: WeatherForecast
@@ -36,8 +47,33 @@ class HeaderViewModel {
         
         return dateFormatter.string(from: date).capitalized
     }
+
+    public var getTemperatureImage: UIImage {
+        var iconName = self.getIconForecast(of: weatherForecast.weather[0].id)
+        return  UIImage(systemName: iconName)!.scalePreservingAspectRatio(targetSize: CGSize(width: 120, height: 120)).withTintColor(.secondary)
+    }
     
+    public var getDayDescription: String {
+        return weatherForecast.weather[0].description.capitalized
+    }
     
-    
-    
+    // Code Icons https://openweathermap.org/weather-conditions
+    private func getIconForecast(of id: Int) -> String {
+        switch id {
+        case 200...232:
+            return WeatherIconEnum.thunderstorm.rawValue
+        case 300...321:
+            return WeatherIconEnum.drizzle.rawValue
+        case 500...531:
+            return WeatherIconEnum.rain.rawValue
+        case 600...622:
+            return WeatherIconEnum.snow.rawValue
+        case 800:
+            return WeatherIconEnum.clear.rawValue
+        case 801...804:
+            return WeatherIconEnum.clouds.rawValue
+        default:
+            return WeatherIconEnum.other.rawValue
+        }
+    }
 }

@@ -17,6 +17,7 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
     lazy var maxTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Max: 22°", type: .max)
     lazy var minTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Min: 18°", type: .min)
     lazy var dayLabel = UILabelComponent(labelText: "Segunda, 11", fontSize: 30, fontWeight: .regular, fontColor: .primary)
+    lazy var dayDescription = UILabelComponent(labelText: "Céu Limpo", fontSize: 24, fontWeight: .light, fontColor: .primary)
     
     lazy var searchButton: UIButton = {
         let button = UIButton()
@@ -38,7 +39,7 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
     
     //MARK: - Stacks Views
     lazy var temperatureMinMaxFocus = createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
-                                                      axis: .vertical, alignment: .leading, distribution: .fillEqually, spacing: 15)
+                                                      axis: .vertical, alignment: .leading, distribution: .fillEqually, spacing: 10)
     lazy var temperatureFocus = createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
     
     override init(reuseIdentifier: String?) {
@@ -57,7 +58,7 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         self.addSubview(temperatureFocus)
         self.addSubview(dayLabel)
         self.addSubview(temperatureImage)
-        
+        self.addSubview(dayDescription)
     }
     
     private func configConstraints() {
@@ -79,6 +80,9 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
             
             self.temperatureImage.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 30),
             self.temperatureImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            self.dayDescription.topAnchor.constraint(equalTo: self.temperatureImage.bottomAnchor, constant: 30),
+            self.dayDescription.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
         ])
     }
@@ -106,6 +110,8 @@ class HomeScreenViewHeader: UITableViewHeaderFooterView {
         self.minTemperature.updateTemperatureText(viewModel.getMinTemperature)
         self.maxTemperature.updateTemperatureText(viewModel.getMaxTemperature)
         self.dayLabel.text = viewModel.getDayAndDate
+        self.temperatureImage.image = viewModel.getTemperatureImage
+        self.dayDescription.text = viewModel.getDayDescription
     }
     
 }
