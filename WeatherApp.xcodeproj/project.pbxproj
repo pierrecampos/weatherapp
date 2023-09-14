@@ -45,7 +45,7 @@
 		8FF23A4B2AABDFF700240E18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FF23A4E2AABDFF700240E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FF23A502AABDFF700240E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8FF23A5C2AABE39A00240E18 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeScreenView.swift; path = HomeScreenView/HomeScreenView.swift; sourceTree = "<group>"; };
+		8FF23A5C2AABE39A00240E18 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		8FF23A5F2AABEDC200240E18 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		8FF23A622AABF52600240E18 /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,12 +61,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8F7E70A02AACD01700DA72C1 /* Service */ = {
+		8F7E70A02AACD01700DA72C1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		8FD364BD2AB3C5D6002E948D /* Header */ = {
@@ -114,6 +114,43 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		8FD364D42AB3C786002E948D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8FD364D22AB3C65C002E948D /* forecast.json */,
+				8FF23A4B2AABDFF700240E18 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8FD364D62AB3C810002E948D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8FF23A4D2AABDFF700240E18 /* LaunchScreen.storyboard */,
+				8FF23A422AABDFF700240E18 /* AppDelegate.swift */,
+				8FF23A442AABDFF700240E18 /* SceneDelegate.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8FD364D72AB3C8BF002E948D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8FD364C62AB3C605002E948D /* Extension */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8FD364D82AB3C929002E948D /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				8FD364BD2AB3C5D6002E948D /* Header */,
+				8FF23A5B2AABE37700240E18 /* Screen */,
+				8FF23A462AABDFF700240E18 /* HomeViewController.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
 		8FF23A362AABDFF700240E18 = {
 			isa = PBXGroup;
 			children = (
@@ -133,19 +170,15 @@
 		8FF23A412AABDFF700240E18 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				8FD364C62AB3C605002E948D /* Extension */,
+				8FD364D72AB3C8BF002E948D /* Utils */,
+				8FD364D42AB3C786002E948D /* Resources */,
 				8FD364C32AB3C5F2002E948D /* GradientView */,
-				8FD364BD2AB3C5D6002E948D /* Header */,
-				8F7E70A02AACD01700DA72C1 /* Service */,
-				8FF23A612AABF4ED00240E18 /* Model */,
+				8F7E70A02AACD01700DA72C1 /* Services */,
+				8FF23A612AABF4ED00240E18 /* Models */,
 				8FF23A5E2AABED9100240E18 /* ViewModel */,
 				8FF23A562AABE2DE00240E18 /* View */,
-				8FF23A422AABDFF700240E18 /* AppDelegate.swift */,
-				8FF23A442AABDFF700240E18 /* SceneDelegate.swift */,
-				8FF23A4B2AABDFF700240E18 /* Assets.xcassets */,
-				8FF23A4D2AABDFF700240E18 /* LaunchScreen.storyboard */,
 				8FF23A502AABDFF700240E18 /* Info.plist */,
-				8FD364D22AB3C65C002E948D /* forecast.json */,
+				8FD364D62AB3C810002E948D /* Core */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -153,9 +186,8 @@
 		8FF23A562AABE2DE00240E18 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8FD364D82AB3C929002E948D /* HomeView */,
 				8FD364CB2AB3C614002E948D /* Components */,
-				8FF23A5B2AABE37700240E18 /* Screen */,
-				8FF23A462AABDFF700240E18 /* HomeViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,12 +208,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		8FF23A612AABF4ED00240E18 /* Model */ = {
+		8FF23A612AABF4ED00240E18 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				8FF23A622AABF52600240E18 /* WeatherForecast.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
