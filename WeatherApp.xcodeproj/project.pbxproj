@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8F7E70A22AACD1A900DA72C1 /* OpenWeatherApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */; };
-		8FD364C12AB3C5D6002E948D /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364BF2AB3C5D6002E948D /* HeaderViewModel.swift */; };
-		8FD364C22AB3C5D6002E948D /* HomeScreenViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364C02AB3C5D6002E948D /* HomeScreenViewHeader.swift */; };
-		8FD364C52AB3C5F2002E948D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364C42AB3C5F2002E948D /* GradientView.swift */; };
 		8FD364C92AB3C605002E948D /* UIColor+DefaultColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364C72AB3C605002E948D /* UIColor+DefaultColors.swift */; };
 		8FD364CA2AB3C605002E948D /* UIImage+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364C82AB3C605002E948D /* UIImage+Scale.swift */; };
 		8FD364CF2AB3C614002E948D /* UILabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364CC2AB3C614002E948D /* UILabelComponent.swift */; };
@@ -29,9 +26,6 @@
 
 /* Begin PBXFileReference section */
 		8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherApiService.swift; sourceTree = "<group>"; };
-		8FD364BF2AB3C5D6002E948D /* HeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
-		8FD364C02AB3C5D6002E948D /* HomeScreenViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewHeader.swift; sourceTree = "<group>"; };
-		8FD364C42AB3C5F2002E948D /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8FD364C72AB3C605002E948D /* UIColor+DefaultColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DefaultColors.swift"; sourceTree = "<group>"; };
 		8FD364C82AB3C605002E948D /* UIImage+Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Scale.swift"; sourceTree = "<group>"; };
 		8FD364CC2AB3C614002E948D /* UILabelComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelComponent.swift; sourceTree = "<group>"; };
@@ -69,30 +63,12 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		8FD364BD2AB3C5D6002E948D /* Header */ = {
+		8F8F70F52AB4C9EA00B0690B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8FD364BE2AB3C5D6002E948D /* ViewModel */,
-				8FD364C02AB3C5D6002E948D /* HomeScreenViewHeader.swift */,
+				8FF23A462AABDFF700240E18 /* HomeViewController.swift */,
 			);
-			path = Header;
-			sourceTree = "<group>";
-		};
-		8FD364BE2AB3C5D6002E948D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8FD364BF2AB3C5D6002E948D /* HeaderViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		8FD364C32AB3C5F2002E948D /* GradientView */ = {
-			isa = PBXGroup;
-			children = (
-				8FD364C42AB3C5F2002E948D /* GradientView.swift */,
-			);
-			name = GradientView;
-			path = View/GradientView;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		8FD364C62AB3C605002E948D /* Extension */ = {
@@ -144,9 +120,7 @@
 		8FD364D82AB3C929002E948D /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				8FD364BD2AB3C5D6002E948D /* Header */,
-				8FF23A5B2AABE37700240E18 /* Screen */,
-				8FF23A462AABDFF700240E18 /* HomeViewController.swift */,
+				8FF23A5C2AABE39A00240E18 /* HomeScreenView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -170,14 +144,14 @@
 		8FF23A412AABDFF700240E18 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				8FF23A502AABDFF700240E18 /* Info.plist */,
 				8FD364D72AB3C8BF002E948D /* Utils */,
 				8FD364D42AB3C786002E948D /* Resources */,
-				8FD364C32AB3C5F2002E948D /* GradientView */,
 				8F7E70A02AACD01700DA72C1 /* Services */,
 				8FF23A612AABF4ED00240E18 /* Models */,
 				8FF23A5E2AABED9100240E18 /* ViewModel */,
 				8FF23A562AABE2DE00240E18 /* View */,
-				8FF23A502AABDFF700240E18 /* Info.plist */,
+				8F8F70F52AB4C9EA00B0690B /* ViewControllers */,
 				8FD364D62AB3C810002E948D /* Core */,
 			);
 			path = WeatherApp;
@@ -190,14 +164,6 @@
 				8FD364CB2AB3C614002E948D /* Components */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		8FF23A5B2AABE37700240E18 /* Screen */ = {
-			isa = PBXGroup;
-			children = (
-				8FF23A5C2AABE39A00240E18 /* HomeScreenView.swift */,
-			);
-			path = Screen;
 			sourceTree = "<group>";
 		};
 		8FF23A5E2AABED9100240E18 /* ViewModel */ = {
@@ -287,9 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FD364C22AB3C5D6002E948D /* HomeScreenViewHeader.swift in Sources */,
 				8FF23A472AABDFF700240E18 /* HomeViewController.swift in Sources */,
-				8FD364C52AB3C5F2002E948D /* GradientView.swift in Sources */,
 				8FF23A432AABDFF700240E18 /* AppDelegate.swift in Sources */,
 				8F7E70A22AACD1A900DA72C1 /* OpenWeatherApiService.swift in Sources */,
 				8FD364D02AB3C614002E948D /* AditionalInfoComponent.swift in Sources */,
@@ -297,7 +261,6 @@
 				8FF23A632AABF52600240E18 /* WeatherForecast.swift in Sources */,
 				8FD364C92AB3C605002E948D /* UIColor+DefaultColors.swift in Sources */,
 				8FD364D12AB3C614002E948D /* MinMaxTemperatureFocusComponent.swift in Sources */,
-				8FD364C12AB3C5D6002E948D /* HeaderViewModel.swift in Sources */,
 				8FF23A5D2AABE39A00240E18 /* HomeScreenView.swift in Sources */,
 				8FD364CF2AB3C614002E948D /* UILabelComponent.swift in Sources */,
 				8FD364CA2AB3C605002E948D /* UIImage+Scale.swift in Sources */,
