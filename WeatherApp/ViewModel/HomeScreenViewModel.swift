@@ -33,7 +33,7 @@ class HomeScreenViewModel {
     }
     
     public func loadCurrentWeatherForecast(_ indexPath: IndexPath) -> WeatherForecast {
-        return dataSource.list[indexPath.row]
+        return dataSource.list[indexPath.item]
     }
     
     public func fetchWeatherForecast() {

@@ -41,6 +41,7 @@ class HomeScreenView: UIView {
     
     lazy var temperatureImage: UIImageView = {
         let uiImage = UIImageView()
+        uiImage.contentMode = .scaleAspectFit
         uiImage.translatesAutoresizingMaskIntoConstraints = false
         uiImage.image = UIImage(systemName: "sun.max.fill")?.scalePreservingAspectRatio(targetSize: CGSize(width: 120, height: 120)).withTintColor(.white)
         return uiImage
@@ -51,22 +52,21 @@ class HomeScreenView: UIView {
     lazy var humidity = AditionalInfoComponent(iconName: .humidity, iconSize: CGSize(width: 30, height: 30), descriptionText: "50%")
     
     //MARK: - Stacks Views
-    lazy var temperatureMinMaxFocus = createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
+    lazy var temperatureMinMaxFocus = Utils.createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
                                                       axis: .vertical,
                                                       alignment: .leading,
                                                       distribution: .fillEqually,
                                                       spacing: 10
     )
     
-    lazy var temperatureFocus = createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
+    lazy var temperatureFocus =  Utils.createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
     
-    lazy var aditionalInfoFocus = createStackView(items: [probabilityPrecipitation, windSpeed, humidity], axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 64)
+    lazy var aditionalInfoFocus =  Utils.createStackView(items: [probabilityPrecipitation, windSpeed, humidity], axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 64)
     
     // MARK: - CollectionView
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-      
         flowLayout.minimumInteritemSpacing = 1
         return flowLayout
     }()
@@ -74,10 +74,9 @@ class HomeScreenView: UIView {
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.backgroundColor = .gray
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier)
+        collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
-        backgroundColor = .red
         return collectionView
     }()
     
@@ -95,8 +94,8 @@ class HomeScreenView: UIView {
     }
     
     private func configureView() {
-        let fromColor = UIColor(red: 38/255, green: 43/255, blue: 43/255, alpha: 1).cgColor
-        let toColor = UIColor(red: 15/255, green: 29/255, blue: 21/255, alpha: 1).cgColor
+        let fromColor = UIColor.backgroundOne.cgColor
+        let toColor = UIColor.backgroundTwo.cgColor
         
         gradientLayer.colors = [fromColor, toColor]
         gradientLayer.locations = [0.5, 1.0]
@@ -145,36 +144,24 @@ class HomeScreenView: UIView {
             
             self.temperatureImage.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 30),
             self.temperatureImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.temperatureImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.temperatureImage.heightAnchor.constraint(equalToConstant: 120),
             
-            self.dayDescription.topAnchor.constraint(equalTo: self.temperatureImage.bottomAnchor, constant: 30),
+            self.dayDescription.bottomAnchor.constraint(equalTo: self.aditionalInfoFocus.topAnchor, constant: -30),
             self.dayDescription.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            self.aditionalInfoFocus.topAnchor.constraint(equalTo: self.dayDescription.bottomAnchor, constant: 15),
-            self.aditionalInfoFocus.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.aditionalInfoFocus.bottomAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -15),
+            self.aditionalInfoFocus.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 22),
+            self.aditionalInfoFocus.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -22),
             
-            self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.collectionView.heightAnchor.constraint(equalToConstant: frame.height * 0.1)
+            self.collectionView.heightAnchor.constraint(equalToConstant: frame.height * 0.2)
         ])
         
         // Configure Flow Layout
-        self.flowLayout.itemSize = CGSize(width: frame.height * 0.1 - 1, height: frame.height * 0.1 - 1)
-    }
-    
-    private func createStackView(items: [UIView], axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = axis
-        stack.alignment = alignment
-        stack.distribution = distribution
-        stack.spacing = spacing
-        
-        items.forEach { view in
-            stack.addArrangedSubview(view)
-        }
-        
-        return stack
+        self.flowLayout.itemSize = CGSize(width: frame.height * 0.15 - 1, height: frame.height * 0.15 - 1)
     }
     
     public func setupDelegates(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {

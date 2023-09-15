@@ -22,13 +22,16 @@ class HomeViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         self.setupDelegates()
     }
-        
+    
     private func setupDelegates() {
         viewModel.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.viewModel.fetchWeatherForecast()
+        
+        let indexPath = IndexPath(item: 0, section: 0)
+        self.screen?.collectionView.selectItem(at: indexPath , animated: false, scrollPosition: .top)
     }
 }
 
@@ -45,11 +48,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        cell.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as? CustomCollectionViewCell else { return CustomCollectionViewCell()}
+        cell.setup(weatherForecast: viewModel.loadCurrentWeatherForecast(indexPath))
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.screen?.setupInfo(with: viewModel, index: indexPath.item)       
+        
+    }
     
 }
 
