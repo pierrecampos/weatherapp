@@ -135,6 +135,8 @@ class HomeScreenView: UIView {
             self.searchButton.centerYAnchor.constraint(equalTo: self.cityLabel.centerYAnchor),
             self.searchButton.heightAnchor.constraint(equalToConstant: 26),
             
+            self.temperatureLabel.widthAnchor.constraint(equalToConstant: 200),
+            
             self.temperatureFocus.topAnchor.constraint(equalTo: self.cityLabel.bottomAnchor, constant: 30),
             self.temperatureFocus.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.temperatureFocus.heightAnchor.constraint(equalToConstant: 100),
@@ -157,9 +159,11 @@ class HomeScreenView: UIView {
             self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.collectionView.heightAnchor.constraint(equalToConstant: frame.height * 0.2)
-        ])
+            self.collectionView.heightAnchor.constraint(equalToConstant: frame.height * 0.2),
         
+            
+            
+        ])
         // Configure Flow Layout
         self.flowLayout.itemSize = CGSize(width: frame.height * 0.15 - 1, height: frame.height * 0.15 - 1)
     }
