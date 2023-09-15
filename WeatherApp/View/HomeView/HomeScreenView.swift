@@ -62,6 +62,25 @@ class HomeScreenView: UIView {
     
     lazy var aditionalInfoFocus = createStackView(items: [probabilityPrecipitation, windSpeed, humidity], axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 64)
     
+    // MARK: - CollectionView
+    lazy var flowLayout: UICollectionViewFlowLayout = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+      
+        flowLayout.minimumInteritemSpacing = 1
+        return flowLayout
+    }()
+    
+    lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.backgroundColor = .gray
+        collectionView.showsHorizontalScrollIndicator = false
+        backgroundColor = .red
+        return collectionView
+    }()
+    
     lazy var gradientLayer = CAGradientLayer()
     
     override init(frame: CGRect) {
@@ -69,7 +88,6 @@ class HomeScreenView: UIView {
         backgroundColor = .black
         self.configureView()
         self.addSubViews()
-        self.configConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -90,6 +108,7 @@ class HomeScreenView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
+        self.configConstraints()
     }
     
     private func addSubViews() {
@@ -101,6 +120,7 @@ class HomeScreenView: UIView {
         self.addSubview(temperatureImage)
         self.addSubview(dayDescription)
         self.addSubview(aditionalInfoFocus)
+        self.addSubview(collectionView)
     }
     
     private func configConstraints() {
@@ -131,7 +151,15 @@ class HomeScreenView: UIView {
             
             self.aditionalInfoFocus.topAnchor.constraint(equalTo: self.dayDescription.bottomAnchor, constant: 15),
             self.aditionalInfoFocus.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.collectionView.heightAnchor.constraint(equalToConstant: frame.height * 0.1)
         ])
+        
+        // Configure Flow Layout
+        self.flowLayout.itemSize = CGSize(width: frame.height * 0.1 - 1, height: frame.height * 0.1 - 1)
     }
     
     private func createStackView(items: [UIView], axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView {
@@ -147,6 +175,11 @@ class HomeScreenView: UIView {
         }
         
         return stack
+    }
+    
+    public func setupDelegates(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        self.collectionView.delegate = delegate
+        self.collectionView.dataSource = dataSource
     }
     
     public func setupInfo(with viewModel: HomeScreenViewModel, index: Int) {
