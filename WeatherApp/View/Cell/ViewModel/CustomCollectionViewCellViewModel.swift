@@ -20,7 +20,12 @@ class CustomCollectionViewCellViewModel {
         dateFormatter.dateFormat = "EEE"
         dateFormatter.locale = Locale(identifier: "pt_BR")
         let date = Date(timeIntervalSince1970: weatherForecast.dt)
-        return dateFormatter.string(from: date).capitalized
+        if Calendar.current.isDateInToday(date) {
+            return "Hoje"
+        } else {
+            return dateFormatter.string(from: date).capitalized
+        }
+        
     }
     
     

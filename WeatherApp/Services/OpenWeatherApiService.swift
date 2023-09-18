@@ -14,7 +14,7 @@ enum Error: Swift.Error {
 }
 
 public class OpenWeatherApiService {
-    
+      
     static func getWeatherForecastJson(completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
         guard let url = Bundle.main.url(forResource: "forecast", withExtension: "json")
         else { return completionHandler(.failure(.urlError))}
@@ -46,4 +46,5 @@ public class OpenWeatherApiService {
                 }}            
         }.resume()
     }
+
 }

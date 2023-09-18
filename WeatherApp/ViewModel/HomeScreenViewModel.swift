@@ -29,15 +29,15 @@ class HomeScreenViewModel {
     
     
     var numberOfRows: Int {
-        return dataSource.list.count
+        return dataSource.singleDays.count
     }
     
     public func loadCurrentWeatherForecast(_ indexPath: IndexPath) -> WeatherForecast {
-        return dataSource.list[indexPath.item]
+        return dataSource.singleDays[indexPath.item]
     }
     
     public func fetchWeatherForecast() {
-        OpenWeatherApiService.getWeatherForecastJson { [weak self] result in
+        OpenWeatherApiService.getWeatherForecast { [weak self] result in
             switch result {
             case .success(let data):
                 self?.dataSource = data
@@ -49,21 +49,21 @@ class HomeScreenViewModel {
     }
     
     public func getTemperature(_ index: Int) -> String {
-        return String(format:"%.0f", dataSource.list[index].main.temp)
+        return String(format:"%.0f", dataSource.singleDays[index].main.temp)
     }
     
     public func getMinTemperature(_ index: Int) -> String  {
-        let minValue = String(format:"%.0f", dataSource.list[index].main.tempMin)
+        let minValue = String(format:"%.0f", dataSource.singleDays[index].main.tempMin)
         return "Min: \(minValue)°"
     }
     
     public func getMaxTemperature(_ index: Int) -> String {
-        let maxValue = String(format:"%.0f", dataSource.list[index].main.tempMax)
+        let maxValue = String(format:"%.0f", dataSource.singleDays[index].main.tempMax)
         return "Máx: \(maxValue)°"
     }
     
     public func getDayAndDate(_ index: Int) -> String {
-        let date = Date(timeIntervalSince1970: dataSource.list[index].dt)
+        let date = Date(timeIntervalSince1970: dataSource.singleDays[index].dt)
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "pt_BR")
         dateFormatter.dateFormat = "EEEE, dd"
@@ -72,26 +72,26 @@ class HomeScreenViewModel {
     }
     
     public func getTemperatureImage(_ index: Int) -> UIImage {
-        let iconName = self.getIconForecast(of: dataSource.list[index].weather[0].id)
+        let iconName = self.getIconForecast(of: dataSource.singleDays[index].weather[0].id)
         return  UIImage(systemName: iconName)!.scalePreservingAspectRatio(targetSize: CGSize(width: 120, height: 120)).withTintColor(.secondary)
     }
     
     public func getDayDescription(_ index: Int) -> String {
-        return dataSource.list[index].weather[0].description.capitalized
+        return dataSource.singleDays[index].weather[0].description.capitalized
     }
     
     public func getProbabilityPrecipitation(_ index: Int) -> String {
-        let preciptation = dataSource.list[index].pop * 100
+        let preciptation = dataSource.singleDays[index].pop * 100
         return String(format: "%.0f%%", preciptation)
     }
     
     public func getWindSpeed(_ index: Int) -> String {
-        let speed = dataSource.list[index].wind.speed * 3.6
+        let speed = dataSource.singleDays[index].wind.speed * 3.6
         return String(format: "%.0f km/h", speed)
     }
     
     public func getHumidity(_ index: Int) -> String {
-        return String(format: "%.0f%%",dataSource.list[index].main.humidity)
+        return String(format: "%.0f%%",dataSource.singleDays[index].main.humidity)
     }
     
     // Code Icons https://openweathermap.org/weather-conditions

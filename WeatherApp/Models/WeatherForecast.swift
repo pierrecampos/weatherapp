@@ -4,9 +4,25 @@
 //
 //  Created by Pierre Campos Dias on 08/09/23.
 //
+import Foundation
 
 struct WeatherForecastModel: Codable {
     var list: [WeatherForecast]
+    var singleDays: [WeatherForecast] {
+        var uniqueDays = [Int]()
+        return list.filter { current in
+            let date = Date(timeIntervalSince1970: current.dt)
+            let day = Calendar.current.dateComponents([.day], from: date).day
+            guard let _day = day else { return false }
+            
+            if !uniqueDays.contains(_day) {
+                uniqueDays.append(_day)
+                return true
+            }
+
+            return false
+        }
+    }
 }
 
 struct WeatherForecast: Codable {
