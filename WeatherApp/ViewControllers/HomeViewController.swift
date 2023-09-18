@@ -29,9 +29,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.viewModel.fetchWeatherForecast()
-        
-        let indexPath = IndexPath(item: 0, section: 0)
-        self.screen?.collectionView.selectItem(at: indexPath , animated: false, scrollPosition: .top)
     }
 }
 
@@ -39,6 +36,9 @@ extension HomeViewController: HomeScreenViewModelDelegate {
     func successFetchData() {
         self.screen?.setupDelegates(delegate: self, dataSource: self)
         self.screen?.setupInfo(with: viewModel, index: 0)
+        
+        let indexPath = IndexPath(item: 0, section: 0)
+        self.screen?.collectionView.selectItem(at: indexPath , animated: false, scrollPosition: .top)
     }
 }
 
