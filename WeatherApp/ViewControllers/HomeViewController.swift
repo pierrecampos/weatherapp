@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
     
     private func setupDelegates() {
         viewModel.delegate = self
+        screen?.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,9 +55,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.screen?.setupInfo(with: viewModel, index: indexPath.item)       
+        self.screen?.setupInfo(with: viewModel, index: indexPath.item)
         
     }
-    
+}
+
+extension HomeViewController: HomeScreenViewDelegate {
+    func searchTapped() {
+        let searchController = SearchViewController()
+        let nav = UINavigationController(rootViewController: searchController)
+        present(nav, animated: true)
+    }
 }
 

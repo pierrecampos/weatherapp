@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol HomeScreenViewDelegate: AnyObject {
+    func searchTapped()
+}
+
 class HomeScreenView: UIView {
+    
+    public weak var delegate: HomeScreenViewDelegate?
     
     lazy var loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -36,6 +42,7 @@ class HomeScreenView: UIView {
         button.tintColor = .white
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 26, left: 26, bottom: 26, right: 26)
+        button.addTarget(self, action: #selector(searchTapped), for: .touchUpInside)
         return button
     }()
     
@@ -167,6 +174,11 @@ class HomeScreenView: UIView {
         // Configure Flow Layout
         self.flowLayout.itemSize = CGSize(width: frame.height * 0.15 - 1, height: frame.height * 0.15 - 1)
     }
+    
+    @objc private func searchTapped() {
+        self.delegate?.searchTapped()
+    }
+    
     
     public func setupDelegates(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         self.collectionView.delegate = delegate
