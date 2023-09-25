@@ -28,7 +28,7 @@ class HomeScreenViewModel {
     private var dataSource = WeatherForecastModel(list: [])
     
     
-    var numberOfRows: Int {
+    var  numberOfRows: Int {
         return dataSource.singleDays.count
     }
     

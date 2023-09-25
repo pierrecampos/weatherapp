@@ -11,6 +11,7 @@
 		8F8F70F82AB4D73900B0690B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8F70F72AB4D73900B0690B /* CustomCollectionViewCell.swift */; };
 		8F8F70FB2AB4D7F200B0690B /* CustomCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8F70FA2AB4D7F200B0690B /* CustomCollectionViewCellViewModel.swift */; };
 		8F8F70FD2AB4E50000B0690B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8F70FC2AB4E50000B0690B /* Utils.swift */; };
+		8FBEB23E2AC23498004B16F6 /* SearchScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBEB23D2AC23498004B16F6 /* SearchScreenViewModel.swift */; };
 		8FC3BD8B2ABBABB500DC7D90 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3BD8A2ABBABB500DC7D90 /* SearchViewController.swift */; };
 		8FC3BD8E2ABBABEA00DC7D90 /* SearchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3BD8D2ABBABEA00DC7D90 /* SearchScreenView.swift */; };
 		8FD364C92AB3C605002E948D /* UIColor+DefaultColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364C72AB3C605002E948D /* UIColor+DefaultColors.swift */; };
@@ -34,6 +35,7 @@
 		8F8F70F72AB4D73900B0690B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		8F8F70FA2AB4D7F200B0690B /* CustomCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		8F8F70FC2AB4E50000B0690B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		8FBEB23D2AC23498004B16F6 /* SearchScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenViewModel.swift; sourceTree = "<group>"; };
 		8FC3BD8A2ABBABB500DC7D90 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8FC3BD8D2ABBABEA00DC7D90 /* SearchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenView.swift; sourceTree = "<group>"; };
 		8FD364C72AB3C605002E948D /* UIColor+DefaultColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+DefaultColors.swift"; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				8FF23A5F2AABEDC200240E18 /* HomeScreenViewModel.swift */,
+				8FBEB23D2AC23498004B16F6 /* SearchScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -249,7 +252,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					8FF23A3E2AABDFF700240E18 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -304,6 +307,7 @@
 				8FF23A632AABF52600240E18 /* WeatherForecast.swift in Sources */,
 				8FD364C92AB3C605002E948D /* UIColor+DefaultColors.swift in Sources */,
 				8FC3BD8B2ABBABB500DC7D90 /* SearchViewController.swift in Sources */,
+				8FBEB23E2AC23498004B16F6 /* SearchScreenViewModel.swift in Sources */,
 				8FD364D12AB3C614002E948D /* MinMaxTemperatureFocusComponent.swift in Sources */,
 				8FF23A5D2AABE39A00240E18 /* HomeScreenView.swift in Sources */,
 				8FD364CF2AB3C614002E948D /* UILabelComponent.swift in Sources */,
@@ -362,6 +366,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -422,6 +427,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
