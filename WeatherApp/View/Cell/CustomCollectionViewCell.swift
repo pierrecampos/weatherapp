@@ -8,21 +8,7 @@
 import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
-    
-    enum WeatherIconEnum: String {
-        case thunderstorm = "cloud.bolt.rain"
-        case drizzle = "cloud.drizzle"
-        case rain = "cloud.heavyrain"
-        case snow = "cloud.snow"
-        case clear = "sun.max"
-        case clouds = "cloud"
-        case other = "sun.haze"
-    }
-    
-    public static var identifier = "CustomCollectionViewCell"
-    
-    private var viewModel: CustomCollectionViewCellViewModel?
-    
+    //MARK: - UI
     lazy var dayOfWeekLabel = UILabelComponent(labelText: "Seg", fontSize: 16, fontWeight: .regular, fontColor: .secondary)
     lazy var maxTemperatureLabel = UILabelComponent(labelText: "24°", fontSize: 14, fontWeight: .regular, fontColor: .secondary)
     lazy var minTemperatureLabel = UILabelComponent(labelText: "19°", fontSize: 14, fontWeight: .regular, fontColor: .primary)
@@ -48,12 +34,24 @@ class CustomCollectionViewCell: UICollectionViewCell {
                                                     spacing: 6
     )
     
+    //MARK: - Properties
+    public static var identifier = "CustomCollectionViewCell"
+    private var viewModel: CustomCollectionViewCellViewModel! {
+        didSet {
+            dayOfWeekLabel.text = self.viewModel?.dayOfWeek
+            temperatureImage.image = self.viewModel?.temperatureImage
+            minTemperatureLabel.text = self.viewModel?.minTemperature
+            maxTemperatureLabel.text = self.viewModel?.maxTemperature
+        }
+    }
+    
     override var isSelected: Bool {
         didSet {
             layer.borderColor = isSelected ? UIColor.primary.cgColor : UIColor.backgroundOne.cgColor
         }
     }
     
+    //MARK: - Constructors
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -65,6 +63,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Functions
     private func configure() {
         layer.cornerRadius = 8
         layer.borderColor = UIColor.backgroundOne.cgColor
@@ -93,9 +92,5 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     public func setup(weatherForecast viewModel: WeatherForecast) {
         self.viewModel = CustomCollectionViewCellViewModel(weatherForecast: viewModel)
-        dayOfWeekLabel.text = self.viewModel?.dayOfWeek
-        temperatureImage.image = self.viewModel?.temperatureImage
-        minTemperatureLabel.text = self.viewModel?.minTemperature
-        maxTemperatureLabel.text = self.viewModel?.maxTemperature
     }
 }

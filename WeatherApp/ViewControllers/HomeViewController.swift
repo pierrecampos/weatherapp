@@ -9,8 +9,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    var viewModel = HomeScreenViewModel()
-    var screen: HomeScreenView?
+    private var viewModel: HomeScreenViewModel!
+    private var screen: HomeScreenView?
+    private var dataSource: ForecastCollectionViewDataSource<CustomCollectionViewCell, WeatherForecast>!
     
     override func loadView() {
         self.screen = HomeScreenView()
@@ -19,44 +20,40 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureView()
+    }
+    
+    private func configureView() {
         navigationController?.isNavigationBarHidden = true
-        self.setupDelegates()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel = HomeScreenViewModel()
+        setupDelegates()
     }
     
     private func setupDelegates() {
         viewModel.delegate = self
         screen?.delegate = self
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.viewModel.fetchWeatherForecast()
-    }
 }
 
 extension HomeViewController: HomeScreenViewModelDelegate {
     func successFetchData() {
-        self.screen?.setupDelegates(delegate: self, dataSource: self)
-        self.screen?.setupInfo(with: viewModel, index: 0)
+        self.dataSource = ForecastCollectionViewDataSource(cellIdentifier: CustomCollectionViewCell.identifier, items: viewModel.forecastData.singleDays, configureCell: { cell, data in
+            cell.setup(weatherForecast: data)
+        })
         
+        self.screen?.setupDelegates(collectionViewDelegate: self, collectionViewDataSource: dataSource)
         let indexPath = IndexPath(item: 0, section: 0)
         self.screen?.collectionView.selectItem(at: indexPath , animated: false, scrollPosition: .top)
+        self.screen?.setupInfo(with: viewModel, index: 0)
     }
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfRows
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath) as? CustomCollectionViewCell else { return CustomCollectionViewCell()}
-        cell.setup(weatherForecast: viewModel.loadCurrentWeatherForecast(indexPath))
-        return cell
-    }
-    
+extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.screen?.setupInfo(with: viewModel, index: indexPath.item)
-        
     }
 }
 

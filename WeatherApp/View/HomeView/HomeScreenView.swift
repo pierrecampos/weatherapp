@@ -180,9 +180,9 @@ class HomeScreenView: UIView {
     }
     
     
-    public func setupDelegates(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
-        self.collectionView.delegate = delegate
-        self.collectionView.dataSource = dataSource
+    public func setupDelegates(collectionViewDelegate: UICollectionViewDelegate, collectionViewDataSource: UICollectionViewDataSource) {
+        self.collectionView.delegate = collectionViewDelegate
+        self.collectionView.dataSource = collectionViewDataSource
     }
     
     public func setupInfo(with viewModel: HomeScreenViewModel, index: Int) {
