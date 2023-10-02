@@ -18,6 +18,7 @@ class HomeScreenView: UIView {
     lazy var loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
         indicator.style = .large
         indicator.color = .white
         indicator.startAnimating()
