@@ -29,6 +29,4 @@ class ForecastCollectionViewDataSource<CELL: UICollectionViewCell, T>: NSObject,
         self.configureCell(cell, item)
         return cell
     }
-    
-
 }

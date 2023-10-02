@@ -19,18 +19,21 @@ class HomeScreenView: UIView {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.style = .large
-        indicator.color = .black
-        indicator.backgroundColor = .red
+        indicator.color = .white
         indicator.startAnimating()
         return indicator
     }()
     
     //MARK: - Components
     lazy var cityLabel = UILabelComponent(labelText: "Belo Horzionte, MG", fontSize: 30, fontWeight: .regular, fontColor: .primary)
+    
+    
+    
     lazy var temperatureLabel = UILabelComponent(labelText: "21", fontSize: 128, fontWeight: .bold, fontColor: .secondary)
     lazy var temperatureSymbolLabel = UILabelComponent(labelText: "°C", fontSize: 32, fontWeight: .bold, fontColor: .primary)
     lazy var maxTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Max: 22°", type: .max)
     lazy var minTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Min: 18°", type: .min)
+    
     lazy var dayLabel = UILabelComponent(labelText: "Segunda, 11", fontSize: 30, fontWeight: .regular, fontColor: .primary)
     lazy var dayDescription = UILabelComponent(labelText: "Céu Limpo", fontSize: 24, fontWeight: .light, fontColor: .primary)
     
@@ -59,16 +62,22 @@ class HomeScreenView: UIView {
     lazy var humidity = AditionalInfoComponent(iconName: .humidity, iconSize: CGSize(width: 30, height: 30), descriptionText: "50%")
     
     //MARK: - Stacks Views
+    
+    lazy var header = Utils.createStackView(items: [cityLabel, searchButton], axis: .horizontal, alignment: .center, distribution: .equalCentering, spacing: 30)
     lazy var temperatureMinMaxFocus = Utils.createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
-                                                      axis: .vertical,
-                                                      alignment: .leading,
-                                                      distribution: .fillEqually,
-                                                      spacing: 10
+                                                            axis: .vertical,
+                                                            alignment: .leading,
+                                                            distribution: .fillEqually,
+                                                            spacing: 10
     )
     
     lazy var temperatureFocus =  Utils.createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
     
+    lazy var temperatureDescription = Utils.createStackView(items: [temperatureImage, dayDescription], axis: .vertical, alignment: .center, distribution: .equalSpacing, spacing: 20)
+    
     lazy var aditionalInfoFocus =  Utils.createStackView(items: [probabilityPrecipitation, windSpeed, humidity], axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 64)
+    
+    lazy var container = Utils.createStackView(items: [header, temperatureFocus, dayLabel, temperatureDescription, aditionalInfoFocus, collectionView], axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 0)
     
     // MARK: - CollectionView
     lazy var flowLayout: UICollectionViewFlowLayout = {
@@ -109,6 +118,8 @@ class HomeScreenView: UIView {
         gradientLayer.startPoint = .zero
         gradientLayer.endPoint = CGPoint(x: 0.0, y: 1)
         layer.insertSublayer(gradientLayer, at: 0)
+        
+        container.isHidden = true
     }
     
     override func layoutSubviews() {
@@ -118,58 +129,20 @@ class HomeScreenView: UIView {
     }
     
     private func addSubViews() {
-        self.addSubview(self.loadingIndicator)
-        self.addSubview(cityLabel)
-        self.addSubview(searchButton)
-        self.addSubview(temperatureFocus)
-        self.addSubview(dayLabel)
-        self.addSubview(temperatureImage)
-        self.addSubview(dayDescription)
-        self.addSubview(aditionalInfoFocus)
-        self.addSubview(collectionView)
+        self.addSubview(loadingIndicator)
+        self.addSubview(container)
     }
     
     private func configConstraints() {
         NSLayoutConstraint.activate([
             self.loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.loadingIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
-            self.cityLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            self.cityLabel.trailingAnchor.constraint(equalTo: self.searchButton.leadingAnchor, constant: -22),
-            self.cityLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 22),
-            
-            self.searchButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -22),
-            self.searchButton.centerYAnchor.constraint(equalTo: self.cityLabel.centerYAnchor),
-            self.searchButton.heightAnchor.constraint(equalToConstant: 26),
-            
-            self.temperatureLabel.widthAnchor.constraint(equalToConstant: 200),
-            
-            self.temperatureFocus.topAnchor.constraint(equalTo: self.cityLabel.bottomAnchor, constant: 30),
-            self.temperatureFocus.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.temperatureFocus.heightAnchor.constraint(equalToConstant: 100),
-            
-            self.dayLabel.topAnchor.constraint(equalTo: self.temperatureFocus.bottomAnchor, constant: 30),
-            self.dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            self.temperatureImage.topAnchor.constraint(equalTo: self.dayLabel.bottomAnchor, constant: 30),
-            self.temperatureImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.temperatureImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            self.temperatureImage.heightAnchor.constraint(equalToConstant: 120),
-            
-            self.dayDescription.bottomAnchor.constraint(equalTo: self.aditionalInfoFocus.topAnchor, constant: -30),
-            self.dayDescription.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
-            self.aditionalInfoFocus.bottomAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -15),
-            self.aditionalInfoFocus.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 22),
-            self.aditionalInfoFocus.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -22),
-            
-            self.collectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.collectionView.heightAnchor.constraint(equalToConstant: frame.height * 0.2),
-        
-            
-            
+            self.container.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            self.container.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            self.container.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            self.container.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.container.leadingAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.container.trailingAnchor)
         ])
         // Configure Flow Layout
         self.flowLayout.itemSize = CGSize(width: frame.height * 0.15 - 1, height: frame.height * 0.15 - 1)
@@ -197,6 +170,15 @@ class HomeScreenView: UIView {
         self.probabilityPrecipitation.updateData(descriptionText: viewModel.getProbabilityPrecipitation(index))
         self.windSpeed.updateData(descriptionText: viewModel.getWindSpeed(index))
         self.humidity.updateData(descriptionText: viewModel.getHumidity(index))
+    }
+    
+    public func showContainer(isHidden: Bool) {
+        UIView.transition(
+            with: self.container,
+            duration: 0.2,
+            options: .transitionCrossDissolve,
+            animations: {self.container.isHidden = isHidden }
+        )
     }
 }
 

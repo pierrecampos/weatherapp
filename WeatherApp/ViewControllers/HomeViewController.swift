@@ -48,6 +48,7 @@ extension HomeViewController: HomeScreenViewModelDelegate {
         let indexPath = IndexPath(item: 0, section: 0)
         self.screen?.collectionView.selectItem(at: indexPath , animated: false, scrollPosition: .top)
         self.screen?.setupInfo(with: viewModel, index: 0)
+        self.screen?.showContainer(isHidden: false)
     }
 }
 
