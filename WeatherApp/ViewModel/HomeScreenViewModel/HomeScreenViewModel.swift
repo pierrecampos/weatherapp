@@ -32,11 +32,10 @@ class HomeScreenViewModel: NSObject {
     
     override init() {
         super.init()
-        fetchWeatherForecast()
     }
     
-    func fetchWeatherForecast() {
-        OpenWeatherApiService.getWeatherForecast { [weak self] result in
+    func fetchWeatherForecast(latitude: Double, longitude: Double) {
+        OpenWeatherApiService.getWeatherForecast(latitude, longitude) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.forecastData = data
@@ -44,6 +43,10 @@ class HomeScreenViewModel: NSObject {
                 print(error)
             }
         }
+    }
+    
+    public var cityName: String {
+        return forecastData.city.name
     }
     
     public func getTemperature(_ index: Int) -> String {

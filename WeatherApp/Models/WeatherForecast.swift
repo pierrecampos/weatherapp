@@ -19,10 +19,12 @@ struct WeatherForecastModel: Codable {
                 uniqueDays.append(_day)
                 return true
             }
-
+            
             return false
         }
     }
+    
+    var city: City
 }
 
 struct WeatherForecast: Codable {
@@ -58,6 +60,10 @@ struct Weather: Codable {
 
 struct Wind: Codable {
     var speed: Double
+}
+
+struct City: Codable {
+    var name: String
 }
 
 

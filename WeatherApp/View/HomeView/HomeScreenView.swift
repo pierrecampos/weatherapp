@@ -157,7 +157,7 @@ class HomeScreenView: UIView {
     
     public func setupInfo(with viewModel: HomeScreenViewModel, index: Int) {
         self.loadingIndicator.stopAnimating()
-        self.cityLabel.text = "Belo Horizonte, MG" // TODO: Refactor to CLLocationManager
+        self.cityLabel.text = viewModel.cityName
         self.temperatureLabel.text = viewModel.getTemperature(index)
         self.minTemperature.updateTemperatureText(viewModel.getMinTemperature(index))
         self.maxTemperature.updateTemperatureText(viewModel.getMaxTemperature(index))
@@ -167,6 +167,14 @@ class HomeScreenView: UIView {
         self.probabilityPrecipitation.updateData(descriptionText: viewModel.getProbabilityPrecipitation(index))
         self.windSpeed.updateData(descriptionText: viewModel.getWindSpeed(index))
         self.humidity.updateData(descriptionText: viewModel.getHumidity(index))
+        
+        UIView.transition(
+            with: self.container,
+            duration: 0.1,
+            options: .transitionCrossDissolve,
+            animations: nil
+        )
+        
     }
     
     public func showContainer(isHidden: Bool) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class HomeViewController: UIViewController {
     
@@ -30,11 +31,17 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         viewModel = HomeScreenViewModel()
         setupDelegates()
+        requestUserLocation()
     }
     
     private func setupDelegates() {
         viewModel.delegate = self
         screen?.delegate = self
+        LocationManager.shared.delegate = self
+    }
+    
+    private func requestUserLocation() {
+        LocationManager.shared.requestUserLocationManager()
     }
 }
 
@@ -63,6 +70,13 @@ extension HomeViewController: HomeScreenViewDelegate {
         let searchController = SearchViewController()
         let nav = UINavigationController(rootViewController: searchController)
         present(nav, animated: true)
+    }
+}
+
+extension HomeViewController: LocationManagerDelegate {
+    func updateUserLocation() {
+        let coordinate =  LocationManager.shared.userLocationCoordinate
+        viewModel.fetchWeatherForecast(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
     }
 }
 

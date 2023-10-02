@@ -28,8 +28,8 @@ public class OpenWeatherApiService {
         }
     }
    
-    static func getWeatherForecast(completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
-        let urlString = "https://run.mocky.io/v3/cf4a2eeb-e732-412e-9010-c55d70214f38"        
+    static func getWeatherForecast(_ latitude: Double, _ longitude: Double ,completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
+        let urlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=d85f2a335b0845712dca0458c951343f&lang=pt_br&units=metric"        
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(.urlError))
             return
