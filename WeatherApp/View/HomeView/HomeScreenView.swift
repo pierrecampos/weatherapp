@@ -15,6 +15,7 @@ class HomeScreenView: UIView {
     
     public weak var delegate: HomeScreenViewDelegate?
     
+    //MARK: - Components
     lazy var loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
@@ -25,16 +26,11 @@ class HomeScreenView: UIView {
         return indicator
     }()
     
-    //MARK: - Components
     lazy var cityLabel = UILabelComponent(labelText: "Belo Horzionte, MG", fontSize: 30, fontWeight: .regular, fontColor: .primary)
-    
-    
-    
     lazy var temperatureLabel = UILabelComponent(labelText: "21", fontSize: 128, fontWeight: .bold, fontColor: .secondary)
     lazy var temperatureSymbolLabel = UILabelComponent(labelText: "°C", fontSize: 32, fontWeight: .bold, fontColor: .primary)
     lazy var maxTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Max: 22°", type: .max)
     lazy var minTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Min: 18°", type: .min)
-    
     lazy var dayLabel = UILabelComponent(labelText: "Segunda, 11", fontSize: 30, fontWeight: .regular, fontColor: .primary)
     lazy var dayDescription = UILabelComponent(labelText: "Céu Limpo", fontSize: 24, fontWeight: .light, fontColor: .primary)
     

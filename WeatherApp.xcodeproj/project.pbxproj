@@ -21,6 +21,7 @@
 		8FD364D12AB3C614002E948D /* MinMaxTemperatureFocusComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD364CE2AB3C614002E948D /* MinMaxTemperatureFocusComponent.swift */; };
 		8FD364D32AB3C65C002E948D /* forecast.json in Resources */ = {isa = PBXBuildFile; fileRef = 8FD364D22AB3C65C002E948D /* forecast.json */; };
 		8FDC81352AC88627007E3BB4 /* ForecastCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDC81342AC88627007E3BB4 /* ForecastCollectionViewDataSource.swift */; };
+		8FE8CF3B2ACB829E00568FA9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE8CF3A2ACB829E00568FA9 /* LocationManager.swift */; };
 		8FF23A432AABDFF700240E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF23A422AABDFF700240E18 /* AppDelegate.swift */; };
 		8FF23A452AABDFF700240E18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF23A442AABDFF700240E18 /* SceneDelegate.swift */; };
 		8FF23A472AABDFF700240E18 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF23A462AABDFF700240E18 /* HomeViewController.swift */; };
@@ -46,6 +47,7 @@
 		8FD364CE2AB3C614002E948D /* MinMaxTemperatureFocusComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinMaxTemperatureFocusComponent.swift; sourceTree = "<group>"; };
 		8FD364D22AB3C65C002E948D /* forecast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = forecast.json; sourceTree = "<group>"; };
 		8FDC81342AC88627007E3BB4 /* ForecastCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		8FE8CF3A2ACB829E00568FA9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8FF23A3F2AABDFF700240E18 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF23A422AABDFF700240E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FF23A442AABDFF700240E18 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				8FD364C62AB3C605002E948D /* Extension */,
 				8F8F70FC2AB4E50000B0690B /* Utils.swift */,
+				8FE8CF3A2ACB829E00568FA9 /* LocationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				8FF23A452AABDFF700240E18 /* SceneDelegate.swift in Sources */,
 				8FF23A632AABF52600240E18 /* WeatherForecast.swift in Sources */,
 				8FD364C92AB3C605002E948D /* UIColor+DefaultColors.swift in Sources */,
+				8FE8CF3B2ACB829E00568FA9 /* LocationManager.swift in Sources */,
 				8FC3BD8B2ABBABB500DC7D90 /* SearchViewController.swift in Sources */,
 				8FBEB23E2AC23498004B16F6 /* SearchScreenViewModel.swift in Sources */,
 				8FD364D12AB3C614002E948D /* MinMaxTemperatureFocusComponent.swift in Sources */,
