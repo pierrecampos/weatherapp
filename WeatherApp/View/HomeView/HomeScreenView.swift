@@ -26,7 +26,7 @@ class HomeScreenView: UIView {
         return indicator
     }()
     
-    lazy var cityLabel = UILabelComponent(labelText: "Belo Horzionte, MG", fontSize: 30, fontWeight: .regular, fontColor: .primary)
+    lazy var cityLabel = UILabelComponent(labelText: "", fontSize: 30, fontWeight: .regular, fontColor: .primary)
     lazy var temperatureLabel = UILabelComponent(labelText: "21", fontSize: 128, fontWeight: .bold, fontColor: .secondary)
     lazy var temperatureSymbolLabel = UILabelComponent(labelText: "°C", fontSize: 32, fontWeight: .bold, fontColor: .primary)
     lazy var maxTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Max: 22°", type: .max)
@@ -60,7 +60,7 @@ class HomeScreenView: UIView {
     
     //MARK: - Stacks Views
     
-    lazy var header = Utils.createStackView(items: [cityLabel, searchButton], axis: .horizontal, alignment: .center, distribution: .equalCentering, spacing: 30)
+    lazy var header = Utils.createStackView(items: [cityLabel, searchButton], axis: .horizontal, alignment: .center, distribution: .equalSpacing, spacing: 30)
     lazy var temperatureMinMaxFocus = Utils.createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
                                                             axis: .vertical,
                                                             alignment: .leading,
