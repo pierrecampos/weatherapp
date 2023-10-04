@@ -173,8 +173,7 @@ class HomeScreenView: UIView {
             duration: 0.1,
             options: .transitionCrossDissolve,
             animations: nil
-        )
-        
+        )        
     }
     
     public func showContainer(isHidden: Bool) {

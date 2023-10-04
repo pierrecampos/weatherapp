@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol SearchScreenViewModelDelegate: AnyObject {
     func sucessFilterData()
@@ -14,21 +15,21 @@ protocol SearchScreenViewModelDelegate: AnyObject {
 class SearchScreenViewModel {
     
     public weak var delegate: SearchScreenViewModelDelegate?
-    
-    private var dataSource = ["Belo Horizonte", "Itaúna"]
-    private var filteredData = [String]()
+    private var filteredData: [(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?)] = []
     
     var numberOfRows: Int {
         return filteredData.count
     }
     
-    public func loadCurrentData(_ indexPath: IndexPath) -> String {
+    public func loadCurrentData(_ indexPath: IndexPath) -> (title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?) {
         return filteredData[indexPath.row]
     }
     
-    public func filterData(with text: String) {
-        // TODO: Call API
-        filteredData = dataSource.filter({$0.localizedCaseInsensitiveContains(text)})
-        delegate?.sucessFilterData()
+    public func filterData(with text: String) {        
+        LocationManager.shared.cancelSearchAddresses()
+        LocationManager.shared.searchAddressesForText(text) { [weak self]( result: [(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?)]) in
+            self?.filteredData = result
+            self?.delegate?.sucessFilterData()
+        }
     }
 }

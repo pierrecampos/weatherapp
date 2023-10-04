@@ -23,7 +23,11 @@ class LocationManager: NSObject {
     private lazy var completer = MKLocalSearchCompleter()
     private lazy var searchResults: [(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?)] = []
     private var searchCompletion: (([(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?)]) -> Void)?
-    var userLocationCoordinate: CLLocationCoordinate2D?
+    var userLocationCoordinate: CLLocationCoordinate2D? {
+        didSet {
+            delegate?.updateUserLocation()
+        }
+    }
     
     
     private override init() {}
@@ -87,7 +91,6 @@ extension LocationManager: CLLocationManagerDelegate {
         if let coordinate = locations.first?.coordinate {
             userLocationCoordinate = coordinate
             cllocationManager.stopUpdatingLocation()
-            delegate?.updateUserLocation()
         }
     }
     

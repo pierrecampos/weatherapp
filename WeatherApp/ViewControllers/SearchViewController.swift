@@ -6,13 +6,19 @@
 //
 
 import UIKit
+import CoreLocation
+
+protocol SearchViewControllerDelegate: AnyObject {
+    func userSelectedCity()
+}
 
 class SearchViewController: UIViewController {
+    
+    weak var delegate: SearchViewControllerDelegate?
     
     var viewModel =  SearchScreenViewModel()
     var screen: SearchScreenView?
     var searchController = UISearchController(searchResultsController: nil)
-    
     
     override func loadView() {
         self.screen = SearchScreenView()
@@ -69,6 +75,12 @@ extension SearchViewController: UISearchBarDelegate {
             viewModel.filterData(with: text)
         }
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let text = searchBar.text {
+            viewModel.filterData(with: text)
+        }
+    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -81,12 +93,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         cell.textLabel?.textColor = .secondary
-        cell.textLabel?.text = viewModel.loadCurrentData(indexPath)
+        cell.textLabel?.text = viewModel.loadCurrentData(indexPath).title
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Refactor
+        delegate?.userSelectedCity()
+        let location = viewModel.loadCurrentData(indexPath)
+        let address = (title: location.title!, subtitle: location.subtitle!)
+        LocationManager.shared.searchCoordinatesForAddress(address) { (res:(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?)?) in
+            LocationManager.shared.userLocationCoordinate = res?.coordinate
+        }
         searchController.dismiss(animated: false)
         self.dismiss(animated: true)
     }

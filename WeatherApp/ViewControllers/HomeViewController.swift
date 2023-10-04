@@ -68,8 +68,16 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: HomeScreenViewDelegate {
     func searchTapped() {
         let searchController = SearchViewController()
+        searchController.delegate = self
         let nav = UINavigationController(rootViewController: searchController)
         present(nav, animated: true)
+    }
+}
+
+extension HomeViewController: SearchViewControllerDelegate {
+    func userSelectedCity() {
+        self.screen?.showContainer(isHidden: true)
+        self.screen?.loadingIndicator.startAnimating()
     }
 }
 
