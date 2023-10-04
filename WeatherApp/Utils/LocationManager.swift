@@ -64,6 +64,7 @@ class LocationManager: NSObject {
         if let userRegionCoordinate = self.userLocationCoordinate {
             let region = MKCoordinateRegion(center: userRegionCoordinate, latitudinalMeters: 5000, longitudinalMeters: 5000)
             completer.region = region
+            completer.resultTypes = .address
         }
         
         searchCompletion = completion
@@ -122,6 +123,11 @@ extension LocationManager: MKLocalSearchCompleterDelegate {
             let subtitle = result.subtitle
             let searchRequest = MKLocalSearch.Request(completion: result)
             let coordinate = searchRequest.region.center
+            
+            // Only Cities with State
+            if(!street.contains("-")){
+                return nil
+            }
             
             return (title: street, subtitle: subtitle, coordinate: coordinate)
         })
