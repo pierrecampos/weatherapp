@@ -43,14 +43,14 @@ class HomeScreenView: UIView {
     //MARK: - Stacks Views
     lazy var temperatureMinMaxFocus = Utils.createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
                                                             axis: .vertical,
-                                                            alignment: .fill,
-                                                            distribution: .equalSpacing,
+                                                            alignment: .leading,
+                                                            distribution: .equalCentering,
                                                             spacing: 0
     )
     
-    lazy var temperatureFocus =  Utils.createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
+    lazy var temperatureFocus =  Utils.createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .center, distribution: .equalCentering, spacing: 0)
     
-    lazy var temperatureDescription = Utils.createStackView(items: [temperatureImage, dayDescription], axis: .vertical, alignment: .center, distribution: .equalSpacing, spacing: 20)
+    lazy var temperatureDescription = Utils.createStackView(items: [temperatureImage, dayDescription], axis: .vertical, alignment: .center, distribution: .fillProportionally, spacing: 10)
     
     lazy var aditionalInfoFocus =  Utils.createStackView(items: [probabilityPrecipitation, windSpeed, humidity], axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 64)
     
@@ -114,12 +114,13 @@ class HomeScreenView: UIView {
         NSLayoutConstraint.activate([
             self.loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.loadingIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.temperatureImage.heightAnchor.constraint(lessThanOrEqualToConstant: 100),
             self.temperatureLabel.heightAnchor.constraint(equalToConstant: 100),
-            self.temperatureMinMaxFocus.heightAnchor.constraint(equalToConstant:  100),
-            self.container.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            self.container.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            self.container.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            self.container.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            self.temperatureMinMaxFocus.heightAnchor.constraint(equalTo: self.temperatureLabel.heightAnchor),
+            self.container.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor),
+            self.container.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor),
+            self.container.trailingAnchor.constraint(equalTo: self.layoutMarginsGuide.trailingAnchor),
+            self.container.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: self.container.leadingAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: self.container.trailingAnchor)
         ])
