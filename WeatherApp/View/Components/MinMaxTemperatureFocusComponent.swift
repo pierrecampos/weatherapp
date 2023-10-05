@@ -51,8 +51,8 @@ class MinMaxTemperatureFocusComponent: UIStackView {
         case .min:
             imageSystemName = "arrow.down"
         }
-        let imageView = UIImageView(image: UIImage(systemName: imageSystemName))
-        imageView.tintColor = .primary
+        let image = UIImage(systemName: imageSystemName)?.scalePreservingAspectRatio(targetSize: CGSize(width: 20, height: 20)).withTintColor(.primary)
+        let imageView = UIImageView(image: image)
         
         return imageView
     }

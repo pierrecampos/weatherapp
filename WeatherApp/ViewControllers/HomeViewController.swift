@@ -25,7 +25,11 @@ class HomeViewController: UIViewController {
     }
     
     private func configureView() {
-        navigationController?.isNavigationBarHidden = true
+        title = "Belo Horizonte"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.secondary, .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
+        searchButton.tintColor = .secondary
+        navigationItem.rightBarButtonItem = searchButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,12 +40,18 @@ class HomeViewController: UIViewController {
     
     private func setupDelegates() {
         viewModel.delegate = self
-        screen?.delegate = self
         LocationManager.shared.delegate = self
     }
     
     private func requestUserLocation() {
         LocationManager.shared.requestUserLocationManager()
+    }
+    
+    @objc func searchTapped() {
+        let searchController = SearchViewController()
+        searchController.delegate = self
+        let nav = UINavigationController(rootViewController: searchController)
+        present(nav, animated: true)
     }
 }
 
@@ -65,17 +75,9 @@ extension HomeViewController: UICollectionViewDelegate {
     }
 }
 
-extension HomeViewController: HomeScreenViewDelegate {
-    func searchTapped() {
-        let searchController = SearchViewController()
-        searchController.delegate = self
-        let nav = UINavigationController(rootViewController: searchController)
-        present(nav, animated: true)
-    }
-}
-
 extension HomeViewController: SearchViewControllerDelegate {
-    func userSelectedCity() {
+    func userSelectedCity(nameOfTheCity: String) {
+        title = nameOfTheCity
         self.screen?.showContainer(isHidden: true)
         self.screen?.loadingIndicator.startAnimating()
     }
@@ -84,7 +86,8 @@ extension HomeViewController: SearchViewControllerDelegate {
 extension HomeViewController: LocationManagerDelegate {
     func updateUserLocation() {
         let coordinate =  LocationManager.shared.userLocationCoordinate
-        viewModel.fetchWeatherForecast(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
+//        viewModel.fetchWeatherForecast(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
+        viewModel.fetchWeatherForecastJSON()
     }
 }
 

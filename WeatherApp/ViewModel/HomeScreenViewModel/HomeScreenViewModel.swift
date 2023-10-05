@@ -34,6 +34,17 @@ class HomeScreenViewModel: NSObject {
         super.init()
     }
     
+    func fetchWeatherForecastJSON() {
+        OpenWeatherApiService.getWeatherForecastJson { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.forecastData = data
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func fetchWeatherForecast(latitude: Double, longitude: Double) {
         OpenWeatherApiService.getWeatherForecast(latitude, longitude) { [weak self] result in
             switch result {
@@ -54,13 +65,11 @@ class HomeScreenViewModel: NSObject {
     }
     
     public func getMinTemperature(_ index: Int) -> String  {
-        let minValue = String(format:"%.0f", forecastData.singleDays[index].main.tempMin)
-        return "Min: \(minValue)°"
+        return String(format:"%.0f°", forecastData.singleDays[index].main.tempMin)
     }
     
     public func getMaxTemperature(_ index: Int) -> String {
-        let maxValue = String(format:"%.0f", forecastData.singleDays[index].main.tempMax)
-        return "Máx: \(maxValue)°"
+        return String(format:"%.0f°", forecastData.singleDays[index].main.tempMax)  
     }
     
     public func getDayAndDate(_ index: Int) -> String {

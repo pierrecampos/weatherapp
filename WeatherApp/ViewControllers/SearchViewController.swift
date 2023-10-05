@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 
 protocol SearchViewControllerDelegate: AnyObject {
-    func userSelectedCity()
+    func userSelectedCity(nameOfTheCity: String)
 }
 
 class SearchViewController: UIViewController {
@@ -98,9 +98,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.userSelectedCity()
         let location = viewModel.loadCurrentData(indexPath)
         let address = (title: location.title!, subtitle: location.subtitle!)
+        delegate?.userSelectedCity(nameOfTheCity: location.title!)
         LocationManager.shared.searchCoordinatesForAddress(address) { (res:(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?)?) in
             LocationManager.shared.userLocationCoordinate = res?.coordinate
         }

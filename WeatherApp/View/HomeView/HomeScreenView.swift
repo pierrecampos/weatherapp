@@ -7,13 +7,8 @@
 
 import UIKit
 
-protocol HomeScreenViewDelegate: AnyObject {
-    func searchTapped()
-}
-
 class HomeScreenView: UIView {
     
-    public weak var delegate: HomeScreenViewDelegate?
     
     //MARK: - Components
     lazy var loadingIndicator: UIActivityIndicatorView = {
@@ -26,25 +21,12 @@ class HomeScreenView: UIView {
         return indicator
     }()
     
-    lazy var cityLabel = UILabelComponent(labelText: "", fontSize: 30, fontWeight: .regular, fontColor: .primary)
-    lazy var temperatureLabel = UILabelComponent(labelText: "21", fontSize: 128, fontWeight: .bold, fontColor: .secondary)
-    lazy var temperatureSymbolLabel = UILabelComponent(labelText: "°C", fontSize: 32, fontWeight: .bold, fontColor: .primary)
-    lazy var maxTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Max: 22°", type: .max)
-    lazy var minTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "Min: 18°", type: .min)
+    lazy var temperatureLabel = UILabelComponent(labelText: "", fontSize: 120, fontWeight: .bold, fontColor: .secondary)
+    lazy var temperatureSymbolLabel = UILabelComponent(labelText: "°C", fontSize: 26, fontWeight: .bold, fontColor: .primary)
+    lazy var maxTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "22°", type: .max)
+    lazy var minTemperature = MinMaxTemperatureFocusComponent(temperatureLabel: "18°", type: .min)
     lazy var dayLabel = UILabelComponent(labelText: "Segunda, 11", fontSize: 30, fontWeight: .regular, fontColor: .primary)
     lazy var dayDescription = UILabelComponent(labelText: "Céu Limpo", fontSize: 24, fontWeight: .light, fontColor: .primary)
-    
-    lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let searchImage = UIImage(systemName: "magnifyingglass")
-        button.setImage(searchImage, for: .normal)
-        button.tintColor = .white
-        button.imageView?.contentMode = .scaleAspectFit
-        button.imageEdgeInsets = UIEdgeInsets(top: 26, left: 26, bottom: 26, right: 26)
-        button.addTarget(self, action: #selector(searchTapped), for: .touchUpInside)
-        return button
-    }()
     
     lazy var temperatureImage: UIImageView = {
         let uiImage = UIImageView()
@@ -59,13 +41,11 @@ class HomeScreenView: UIView {
     lazy var humidity = AditionalInfoComponent(iconName: .humidity, iconSize: CGSize(width: 30, height: 30), descriptionText: "50%")
     
     //MARK: - Stacks Views
-    
-    lazy var header = Utils.createStackView(items: [cityLabel, searchButton], axis: .horizontal, alignment: .center, distribution: .equalSpacing, spacing: 30)
     lazy var temperatureMinMaxFocus = Utils.createStackView(items: [temperatureSymbolLabel, maxTemperature, minTemperature],
                                                             axis: .vertical,
-                                                            alignment: .leading,
-                                                            distribution: .fillEqually,
-                                                            spacing: 10
+                                                            alignment: .fill,
+                                                            distribution: .equalSpacing,
+                                                            spacing: 0
     )
     
     lazy var temperatureFocus =  Utils.createStackView(items: [temperatureLabel, temperatureMinMaxFocus], axis: .horizontal, alignment: .leading, distribution: .equalCentering, spacing: 0)
@@ -74,7 +54,7 @@ class HomeScreenView: UIView {
     
     lazy var aditionalInfoFocus =  Utils.createStackView(items: [probabilityPrecipitation, windSpeed, humidity], axis: .horizontal, alignment: .center, distribution: .fillEqually, spacing: 64)
     
-    lazy var container = Utils.createStackView(items: [header, temperatureFocus, dayLabel, temperatureDescription, aditionalInfoFocus, collectionView], axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 0)
+    lazy var container = Utils.createStackView(items: [temperatureFocus, dayLabel, temperatureDescription, aditionalInfoFocus, collectionView], axis: .vertical, alignment: .center, distribution: .fillEqually, spacing: 0)
     
     // MARK: - CollectionView
     lazy var flowLayout: UICollectionViewFlowLayout = {
@@ -134,6 +114,8 @@ class HomeScreenView: UIView {
         NSLayoutConstraint.activate([
             self.loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.loadingIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.temperatureLabel.heightAnchor.constraint(equalToConstant: 100),
+            self.temperatureMinMaxFocus.heightAnchor.constraint(equalToConstant:  100),
             self.container.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             self.container.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             self.container.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
@@ -145,10 +127,6 @@ class HomeScreenView: UIView {
         self.flowLayout.itemSize = CGSize(width: frame.height * 0.15 - 1, height: frame.height * 0.15 - 1)
     }
     
-    @objc private func searchTapped() {
-        self.delegate?.searchTapped()
-    }
-    
     
     public func setupDelegates(collectionViewDelegate: UICollectionViewDelegate, collectionViewDataSource: UICollectionViewDataSource) {
         self.collectionView.delegate = collectionViewDelegate
@@ -157,7 +135,6 @@ class HomeScreenView: UIView {
     
     public func setupInfo(with viewModel: HomeScreenViewModel, index: Int) {
         self.loadingIndicator.stopAnimating()
-        self.cityLabel.text = viewModel.cityName
         self.temperatureLabel.text = viewModel.getTemperature(index)
         self.minTemperature.updateTemperatureText(viewModel.getMinTemperature(index))
         self.maxTemperature.updateTemperatureText(viewModel.getMaxTemperature(index))
@@ -173,7 +150,7 @@ class HomeScreenView: UIView {
             duration: 0.1,
             options: .transitionCrossDissolve,
             animations: nil
-        )        
+        )
     }
     
     public func showContainer(isHidden: Bool) {
