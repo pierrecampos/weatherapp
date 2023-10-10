@@ -100,7 +100,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let location = viewModel.loadCurrentData(indexPath)
         let address = (title: location.title!, subtitle: location.subtitle!)
-        delegate?.userSelectedCity(nameOfTheCity: location.title!)
+        delegate?.userSelectedCity(nameOfTheCity: location.title!.split(separator: "-").first!.capitalized)
         LocationManager.shared.searchCoordinatesForAddress(address) { (res:(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D?)?) in
             LocationManager.shared.userLocationCoordinate = res?.coordinate
         }
