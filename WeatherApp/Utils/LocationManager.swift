@@ -11,6 +11,7 @@ import MapKit
 
 protocol LocationManagerDelegate: AnyObject {
     func updateUserLocation()
+    func updateUserCityName(_ cityName: String)
 }
 
 class LocationManager: NSObject {
@@ -43,14 +44,15 @@ class LocationManager: NSObject {
                     self.cllocationManager.startUpdatingLocation()
                     break
                 case .denied:
-                    // TODO: dizer ao usuário que é necessário aceitar
+                    // São Paulo City - Default
+                    self.userLocationCoordinate = CLLocationCoordinate2D(latitude: -23.533773, longitude: -46.625290)
+                    self.userLocationUpdated(self.userLocationCoordinate!)
                     break
                 case .notDetermined:
                     self.cllocationManager.requestWhenInUseAuthorization()
                     break
                 default:
                     break
-                    // TODO:
                 }
             }
         }
@@ -73,6 +75,15 @@ class LocationManager: NSObject {
         
         searchCompletion = completion
     }
+    
+    public func userLocationUpdated(_ coordinate: CLLocationCoordinate2D) {
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)        
+        CLGeocoder().reverseGeocodeLocation(location) {[weak self] placemark, error in
+            let cityName = placemark?.first?.locality ?? "-"
+            self?.delegate?.updateUserCityName(cityName)
+            self?.userLocationCoordinate = coordinate
+        }
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -82,16 +93,14 @@ extension LocationManager: CLLocationManagerDelegate {
             cllocationManager.startUpdatingLocation()
             break;
         default:
-            // TODO:
             break;
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.first?.coordinate {
-            userLocationCoordinate = coordinate
             cllocationManager.stopUpdatingLocation()
-        }
+            userLocationUpdated(coordinate)        }
     }
     
     func searchCoordinatesForAddress(_ address: (title: String, subtitle: String),
