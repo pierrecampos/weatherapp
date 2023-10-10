@@ -97,6 +97,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
         cell.textLabel?.textColor = .secondary
         cell.textLabel?.text = viewModel.loadCurrentData(indexPath).title
         return cell
