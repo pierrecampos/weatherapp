@@ -25,7 +25,6 @@ class HomeViewController: UIViewController {
     }
     
     private func configureView() {
-        title = "Belo Horizonte"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.secondary, .font: UIFont.systemFont(ofSize: 22, weight: .bold)]
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
         searchButton.tintColor = .secondary
@@ -64,6 +63,7 @@ extension HomeViewController: HomeScreenViewModelDelegate {
         self.screen?.setupDelegates(collectionViewDelegate: self, collectionViewDataSource: dataSource)
         let indexPath = IndexPath(item: 0, section: 0)
         self.screen?.collectionView.selectItem(at: indexPath , animated: false, scrollPosition: .top)
+        self.screen?.collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
         self.screen?.setupInfo(with: viewModel, index: 0)
         self.screen?.showContainer(isHidden: false)
     }
@@ -86,8 +86,13 @@ extension HomeViewController: SearchViewControllerDelegate {
 extension HomeViewController: LocationManagerDelegate {
     func updateUserLocation() {
         let coordinate =  LocationManager.shared.userLocationCoordinate
-//        viewModel.fetchWeatherForecast(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
-        viewModel.fetchWeatherForecastJSON()
+        self.viewModel.fetchWeatherForecast(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
+        //            self.viewModel.fetchWeatherForecastJSON()
+        
+    }
+    
+    func updateUserCityName(_ cityName: String) {
+        title = cityName
     }
 }
 
