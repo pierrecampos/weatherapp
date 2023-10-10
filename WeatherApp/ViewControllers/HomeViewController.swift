@@ -92,8 +92,6 @@ extension HomeViewController: LocationManagerDelegate {
     func updateUserLocation() {
         let coordinate =  LocationManager.shared.userLocationCoordinate
         self.viewModel.fetchWeatherForecast(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
-        //            self.viewModel.fetchWeatherForecastJSON()
-        
     }
     
     func updateUserCityName(_ cityName: String) {
