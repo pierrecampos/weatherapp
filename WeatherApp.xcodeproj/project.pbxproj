@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F51CA422AD60B4E003A5E0B /* UIView+GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51CA412AD60B4E003A5E0B /* UIView+GradientLayer.swift */; };
 		8F7E70A22AACD1A900DA72C1 /* OpenWeatherApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */; };
 		8F8F70F82AB4D73900B0690B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8F70F72AB4D73900B0690B /* CustomCollectionViewCell.swift */; };
 		8F8F70FB2AB4D7F200B0690B /* CustomCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8F70FA2AB4D7F200B0690B /* CustomCollectionViewCellViewModel.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F51CA412AD60B4E003A5E0B /* UIView+GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GradientLayer.swift"; sourceTree = "<group>"; };
 		8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherApiService.swift; sourceTree = "<group>"; };
 		8F8F70F72AB4D73900B0690B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		8F8F70FA2AB4D7F200B0690B /* CustomCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				8FD364C72AB3C605002E948D /* UIColor+DefaultColors.swift */,
 				8FD364C82AB3C605002E948D /* UIImage+Scale.swift */,
+				8F51CA412AD60B4E003A5E0B /* UIView+GradientLayer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				8FF23A432AABDFF700240E18 /* AppDelegate.swift in Sources */,
 				8F7E70A22AACD1A900DA72C1 /* OpenWeatherApiService.swift in Sources */,
 				8F8F70F82AB4D73900B0690B /* CustomCollectionViewCell.swift in Sources */,
+				8F51CA422AD60B4E003A5E0B /* UIView+GradientLayer.swift in Sources */,
 				8FDC81352AC88627007E3BB4 /* ForecastCollectionViewDataSource.swift in Sources */,
 				8FC3BD8E2ABBABEA00DC7D90 /* SearchScreenView.swift in Sources */,
 				8F8F70FB2AB4D7F200B0690B /* CustomCollectionViewCellViewModel.swift in Sources */,

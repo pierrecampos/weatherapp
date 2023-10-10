@@ -31,6 +31,11 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = searchButton
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.insertGradientLayer()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         viewModel = HomeScreenViewModel()
         setupDelegates()

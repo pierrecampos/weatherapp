@@ -33,6 +33,11 @@ class SearchViewController: UIViewController {
         definesPresentationContext = true
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.insertGradientLayer()
+    }
+    
     private func configure() {
         title = "Buscar Localização"
         navigationController?.navigationBar.prefersLargeTitles = true

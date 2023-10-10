@@ -73,8 +73,6 @@ class HomeScreenView: UIView {
         return collectionView
     }()
     
-    lazy var gradientLayer = CAGradientLayer()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .black
@@ -86,22 +84,12 @@ class HomeScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureView() {
-        let fromColor = UIColor.backgroundOne.cgColor
-        let toColor = UIColor.backgroundTwo.cgColor
-        
-        gradientLayer.colors = [fromColor, toColor]
-        gradientLayer.locations = [0.5, 1.0]
-        gradientLayer.startPoint = .zero
-        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1)
-        layer.insertSublayer(gradientLayer, at: 0)
-        
+    private func configureView() {        
         container.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer.frame = bounds
         self.configConstraints()
     }
     
