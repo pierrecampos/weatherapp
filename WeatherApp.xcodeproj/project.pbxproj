@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F09F4EB2AD6205400837B0E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F09F4EA2AD6205400837B0E /* Config.swift */; };
 		8F51CA422AD60B4E003A5E0B /* UIView+GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51CA412AD60B4E003A5E0B /* UIView+GradientLayer.swift */; };
 		8F7E70A22AACD1A900DA72C1 /* OpenWeatherApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */; };
 		8F8F70F82AB4D73900B0690B /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8F70F72AB4D73900B0690B /* CustomCollectionViewCell.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F09F4EA2AD6205400837B0E /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8F51CA412AD60B4E003A5E0B /* UIView+GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GradientLayer.swift"; sourceTree = "<group>"; };
 		8F7E70A12AACD1A900DA72C1 /* OpenWeatherApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherApiService.swift; sourceTree = "<group>"; };
 		8F8F70F72AB4D73900B0690B /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				8FF23A4D2AABDFF700240E18 /* LaunchScreen.storyboard */,
 				8FF23A422AABDFF700240E18 /* AppDelegate.swift */,
 				8FF23A442AABDFF700240E18 /* SceneDelegate.swift */,
+				8F09F4EA2AD6205400837B0E /* Config.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				8FD364C92AB3C605002E948D /* UIColor+DefaultColors.swift in Sources */,
 				8FE8CF3B2ACB829E00568FA9 /* LocationManager.swift in Sources */,
 				8FC3BD8B2ABBABB500DC7D90 /* SearchViewController.swift in Sources */,
+				8F09F4EB2AD6205400837B0E /* Config.swift in Sources */,
 				8FBEB23E2AC23498004B16F6 /* SearchScreenViewModel.swift in Sources */,
 				8FD364D12AB3C614002E948D /* MinMaxTemperatureFocusComponent.swift in Sources */,
 				8FF23A5D2AABE39A00240E18 /* HomeScreenView.swift in Sources */,
