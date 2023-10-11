@@ -29,7 +29,7 @@ public class OpenWeatherApiService {
     }
    
     static func getWeatherForecast(_ latitude: Double, _ longitude: Double ,completionHandler: @escaping (_ result: Result<WeatherForecastModel, Error>) -> Void) {
-        let urlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=d85f2a335b0845712dca0458c951343f&lang=pt_br&units=metric"        
+        let urlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(Config.apiKey)&lang=pt_br&units=metric"        
         guard let url = URL(string: urlString) else {
             completionHandler(.failure(.urlError))
             return
